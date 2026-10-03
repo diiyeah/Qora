@@ -37,7 +37,7 @@ addopts = "-ra"
 
 [tool.mypy]
 strict = true
-files = ["services", "packages", "tests"]
+files = ["services", "packages", "tests", "scripts"]
 
 [[tool.mypy.overrides]]
 module = ["qiskit.*", "qiskit_aer.*"]
