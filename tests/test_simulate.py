@@ -72,9 +72,33 @@ def test_backend_failure_is_structured(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr("services.api.simulate.aer.AerSimulator", broken_backend)
     with TestClient(app) as client:
         response = client.post("/simulate", json={"shots": 16})
+        spec = client.get("/openapi.json").json()
     assert response.status_code == 503
     assert response.json()["error"]["type"] == "backend_unavailable"
     assert "secret" not in response.text
+    schema = {
+        **spec["paths"]["/v1/simulate"]["post"]["responses"]["503"]["content"]["application/json"]["schema"],
+        "components": spec["components"],
+    }
+    Draft202012Validator(schema).validate(response.json())
+
+
+def test_unexpected_failure_matches_openapi(monkeypatch: pytest.MonkeyPatch) -> None:
+    def unexpected_failure(shots: int, seed: int | None) -> SimulationResult:
+        raise RuntimeError("private service details")
+
+    monkeypatch.setattr("services.api.main.simulate_bell", unexpected_failure)
+    with TestClient(app, raise_server_exceptions=False) as client:
+        response = client.post("/v1/simulate", json={"shots": 16})
+        spec = client.get("/openapi.json").json()
+    assert response.status_code == 500
+    assert response.json()["error"]["type"] == "backend_unavailable"
+    assert "private" not in response.text
+    schema = {
+        **spec["paths"]["/v1/simulate"]["post"]["responses"]["500"]["content"]["application/json"]["schema"],
+        "components": spec["components"],
+    }
+    Draft202012Validator(schema).validate(response.json())
 
 
 def test_malformed_json_and_unknown_route() -> None:

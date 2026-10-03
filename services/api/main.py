@@ -72,7 +72,11 @@ def health() -> HealthResponse:
 
 @router.post(
     "/simulate", response_model=SimulationResult, tags=["simulation"],
-    responses={422: {"model": ErrorResponse}, 503: {"model": ErrorResponse}},
+    responses={
+        422: {"model": ErrorResponse},
+        500: {"model": ErrorResponse},
+        503: {"model": ErrorResponse},
+    },
 )
 def simulate(request: SimulationRequest) -> SimulationResult:
     """Run the fixed Bell circuit on Aer. General circuit input arrives in Week 2."""
