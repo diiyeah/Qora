@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qora-backend"
+version = "0.1.0"
+description = "Phase 1 quantum computing backend for Qora"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "pydantic>=2.10,<3",
+    "qiskit>=2.0,<3",
+    "qiskit-aer>=0.17,<0.18",
+    "uvicorn>=0.34,<1",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28,<1",
+    "jsonschema>=4.23,<5",
+    "mypy>=1.15,<2",
+    "pytest>=8,<10",
+    "types-jsonschema>=4.23",
+]
+
+[tool.setuptools.packages.find]
+include = ["services*", "packages*"]
+
+[tool.setuptools.package-data]
+"packages.schema" = ["*.json", "py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.mypy]
+strict = true
+files = ["services", "packages", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["qiskit.*", "qiskit_aer.*"]
+ignore_missing_imports = true
+
