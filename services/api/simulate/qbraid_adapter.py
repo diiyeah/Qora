@@ -4,7 +4,7 @@ from packages.schema.models import Circuit
 from services.api.errors import PlatformError
 
 class qBraidAdapter(BackendAdapter):
-    def __init__(self, fallback_adapter: BackendAdapter):
+    def __init__(self, fallback_adapter: BackendAdapter) -> None:
         self.fallback = fallback_adapter
 
     @property

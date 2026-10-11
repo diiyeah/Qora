@@ -84,7 +84,7 @@ def list_backends() -> dict[str, Any]:
 
 @app.exception_handler(HTTPException)
 async def http_error_handler(request: Request, exc: HTTPException) -> JSONResponse:
-    error = ErrorInfo(type="syntax", message=str(exc.detail))
+    error = ErrorInfo(type="syntax", message=exc.detail)
     return JSONResponse(
         status_code=exc.status_code,
         content=ErrorResponse(error=error).model_dump(mode="json"),
