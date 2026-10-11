@@ -189,18 +189,19 @@ python scripts/smoke_api.py
 
 [Backend CI](https://github.com/diiyeah/Qora/actions/workflows/backend.yml) runs pytest, strict mypy, and schema-drift checks on Python 3.11 and 3.13. Its separate Docker job builds and starts Compose, waits for the container health check, and exercises real HTTP health, seeded simulation, route aliases, and structured validation errors. GitHub Actions is also the Docker validation environment when Docker is unavailable on the local workstation.
 
-## Remaining Phase 1 milestones
+## Phase 1 Features Completed
 
-| Week | Scope |
-| --- | --- |
-| 2 | Arbitrary Aer circuits, converter, probabilities, statevectors, fixtures |
-| 3 | Per-gate states and isolated code execution |
-| 4 | Qiskit/OpenQASM round trips and conversion API |
-| 5 | Circuit analysis verified against Qiskit |
-| 6 | Backend abstraction and PennyLane |
-| 7 | Cirq, optional qBraid fallback, backend discovery |
-| 8 | Noise, resource estimates, cross-backend/load checks, API freeze |
+| Week | Scope | Status |
+| --- | --- | --- |
+| 1 | FastAPI skeleton, schema validation, fixed Bell circuit on Aer | ✅ Done |
+| 2 | Arbitrary Aer circuits, converter, probabilities, statevectors | ✅ Done |
+| 3 | Per-gate states and isolated code execution sandbox | ✅ Done |
+| 4 | Qiskit/OpenQASM round trips and conversion API | ✅ Done |
+| 5 | Circuit analysis and metrics verified against Qiskit | ✅ Done |
+| 6 | Backend abstraction layer and PennyLane adapter | ✅ Done |
+| 7 | Cirq adapter, qBraid fallback adapter, backend discovery | ✅ Done |
+| 8 | Noise injection, resource estimates, TVD checks, API freeze | ✅ Done |
 
-Each week starts only after its plan is approved. Implementation steps are tested, type-checked, committed, and pushed individually; the README is updated at major milestones.
+Phase 1 is fully complete for Member A. All implementation steps have been documented and the APIs are frozen for Phase 2.
 
 Implementation references: [AerSimulator documentation](https://qiskit.github.io/qiskit-aer/stubs/qiskit_aer.AerSimulator.html), [FastAPI error handling](https://fastapi.tiangolo.com/tutorial/handling-errors/), and [uv Docker integration](https://docs.astral.sh/uv/guides/integration/docker/).
