@@ -1,4 +1,8 @@
-import pennylane as qml
+from typing import Any
+try:
+    import pennylane as qml
+except ImportError:
+    qml = None
 from importlib.metadata import version
 from services.api.simulate.base import BackendAdapter
 from packages.schema.models import Circuit
@@ -9,21 +13,23 @@ class PennyLaneAdapter(BackendAdapter):
     def name(self) -> str:
         return "pennylane_default.qubit"
         
-    def capabilities(self) -> dict:
+    def capabilities(self) -> dict[str, Any]:
         return {
             "max_qubits": 20,
             "supports_statevector": True,
             "supports_noise": False
         }
         
-    def run(self, circuit: Circuit, shots: int = 1024, noise: dict | None = None, seed: int | None = None) -> dict:
+    def run(self, circuit: Circuit, shots: int = 1024, noise: dict[str, Any] | None = None, seed: int | None = None) -> dict[str, Any]:
+        if qml is None:
+            raise PlatformError("backend_unavailable", "PennyLane is not installed in the current environment.")
         if noise:
-            raise PlatformError("invalid_request", "PennyLane adapter does not currently support noise models.")
+            raise PlatformError("backend_unavailable", "PennyLane adapter does not currently support noise models.")
             
         dev = qml.device('default.qubit', wires=circuit.num_qubits, shots=shots)
         
-        @qml.qnode(dev)
-        def qnode_circuit():
+        @qml.qnode(dev)  # type: ignore[untyped-decorator]
+        def qnode_circuit() -> Any:
             # Translate gates
             for gate in circuit.gates:
                 name = gate.name.lower()
@@ -59,7 +65,7 @@ class PennyLaneAdapter(BackendAdapter):
             # Qiskit output puts qubit 0 on the far right (little-endian: q_n...q_1q_0).
             # PennyLane output puts qubit 0 on the far left (big-endian: q_0q_1...q_n).
             # To make PennyLane match Qiskit's standard, we must reverse the bitstrings.
-            normalized_counts = {}
+            normalized_counts: dict[str, int] = {}
             for bitstring, count in raw_counts.items():
                 reversed_bitstring = bitstring[::-1]
                 normalized_counts[reversed_bitstring] = int(count)

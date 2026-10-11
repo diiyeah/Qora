@@ -1,3 +1,4 @@
+from typing import Any
 from services.api.simulate.base import BackendAdapter
 from packages.schema.models import Circuit
 from services.api.errors import PlatformError
@@ -10,14 +11,14 @@ class qBraidAdapter(BackendAdapter):
     def name(self) -> str:
         return "qbraid_local"
         
-    def capabilities(self) -> dict:
+    def capabilities(self) -> dict[str, Any]:
         return {
             "max_qubits": 20,
             "supports_statevector": True,
             "supports_noise": True
         }
         
-    def run(self, circuit: Circuit, shots: int = 1024, noise: dict | None = None, seed: int | None = None) -> dict:
+    def run(self, circuit: Circuit, shots: int = 1024, noise: dict[str, Any] | None = None, seed: int | None = None) -> dict[str, Any]:
         try:
             # Simulate a qBraid cloud API call
             # In a real implementation, this would use qbraid.providers API keys 

@@ -17,7 +17,7 @@ class BackendAdapter(ABC):
         pass
         
     @abstractmethod
-    def run(self, circuit: Circuit, shots: int = 1024, noise: dict | None = None, seed: int | None = None) -> dict:
+    def run(self, circuit: Circuit, shots: int = 1024, noise: dict[str, Any] | None = None, seed: int | None = None) -> dict[str, Any]:
         """
         Run the given circuit schema on the target backend.
         

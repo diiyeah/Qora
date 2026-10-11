@@ -1,6 +1,6 @@
 """FastAPI application; run with uvicorn services.api.main:app."""
 
-from typing import Literal
+from typing import Any, Literal
 
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -45,10 +45,6 @@ async def validation_error_handler(request: Request, exc: RequestValidationError
     )
     return JSONResponse(status_code=422, content=ErrorResponse(error=error).model_dump(mode="json"))
 
-
-from services.api.simulate.base import BackendAdapter
-from services.api.simulate.pennylane import PennyLaneAdapter
-
 # Backend Registry
 BACKENDS = {
     "aer": {
@@ -82,7 +78,7 @@ BACKENDS = {
 }
 
 @router.get("/backends", tags=["backends"])
-def list_backends():
+def list_backends() -> dict[str, Any]:
     """List all registered backends and their capabilities (Week 7)."""
     return {"backends": list(BACKENDS.values())}
 
@@ -130,7 +126,7 @@ class AnalyzeRequest(BaseModel):
     circuit: Circuit
 
 @router.post("/analyze", tags=["analysis"])
-def analyze(request: AnalyzeRequest):
+def analyze(request: AnalyzeRequest) -> dict[str, Any]:
     """Analyze a circuit and return its metrics (Week 5)."""
     return analyze_circuit(request.circuit)
 
@@ -141,7 +137,7 @@ class ConvertRequest(BaseModel):
     target_format: str
 
 @router.post("/convert", tags=["conversion"])
-def convert(request: ConvertRequest):
+def convert(request: ConvertRequest) -> dict[str, Any]:
     """Convert between schema, QASM, and code representations (Week 4)."""
     if request.target_format == 'qasm':
         if not request.circuit:

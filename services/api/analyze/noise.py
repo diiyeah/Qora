@@ -1,3 +1,4 @@
+from typing import Any
 import math
 
 def hellinger_fidelity(dist_p: dict[str, int], dist_q: dict[str, int], shots: int) -> float:
@@ -28,7 +29,7 @@ def hellinger_fidelity(dist_p: dict[str, int], dist_q: dict[str, int], shots: in
     
     return float(fidelity)
 
-def evaluate_noise_sensitivity(ideal_counts: dict, noisy_counts: dict, shots: int) -> dict:
+def evaluate_noise_sensitivity(ideal_counts: dict[str, int], noisy_counts: dict[str, int], shots: int) -> dict[str, Any]:
     """Calculate the noise sensitivity score for the analyzer endpoint."""
     fidelity = hellinger_fidelity(ideal_counts, noisy_counts, shots)
     

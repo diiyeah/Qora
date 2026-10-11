@@ -2,9 +2,10 @@ import subprocess
 import json
 import os
 import tempfile
+from typing import Any, cast
 from services.api.errors import PlatformError
 
-def execute_sandboxed_code(code: str) -> dict:
+def execute_sandboxed_code(code: str) -> dict[str, Any]:
     """Execute Python code in an isolated subprocess with strict limits."""
     
     # Pre-parse the code to prevent dangerous imports (basic static analysis)
@@ -70,7 +71,7 @@ except Exception as e:
                     raise PlatformError(output["error"]["type"], output["error"]["message"])
                 else:
                     raise PlatformError("syntax", output["error"])
-            return output["circuit"]
+            return cast(dict[str, Any], output["circuit"])
         except json.JSONDecodeError:
             raise PlatformError("sandbox_violation", f"Invalid output from sandbox: {result.stdout}")
             

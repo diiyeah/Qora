@@ -1,13 +1,8 @@
 import pytest
 from packages.schema.models import Circuit
 
-# Dummy backend adapter mocks for testing
-from services.api.simulate.pennylane import PennyLaneAdapter
-from services.api.simulate.cirq_adapter import CirqAdapter
-# Assuming aer adapter exists with similar interface
-
 @pytest.fixture
-def bell_circuit():
+def bell_circuit() -> Circuit:
     return Circuit.model_validate({
         "num_qubits": 2,
         "num_clbits": 2,
@@ -19,11 +14,16 @@ def bell_circuit():
         "metadata": {"framework": "test", "task_id": None},
     })
 
-def test_backend_consistency(bell_circuit):
+def test_backend_consistency(bell_circuit: Circuit) -> None:
     """
     Ensure Aer, PennyLane, and Cirq agree within statistical tolerance 
     (using Total Variation Distance) for the same circuits.
     """
+    pytest.importorskip("pennylane")
+    pytest.importorskip("cirq")
+    from services.api.simulate.pennylane import PennyLaneAdapter
+    from services.api.simulate.cirq_adapter import CirqAdapter
+
     shots = 10000
     
     pennylane_adapter = PennyLaneAdapter()

@@ -1,4 +1,8 @@
-import cirq
+from typing import Any
+try:
+    import cirq
+except ImportError:
+    cirq = None
 from importlib.metadata import version
 from services.api.simulate.base import BackendAdapter
 from packages.schema.models import Circuit
@@ -9,14 +13,16 @@ class CirqAdapter(BackendAdapter):
     def name(self) -> str:
         return "cirq_simulator"
         
-    def capabilities(self) -> dict:
+    def capabilities(self) -> dict[str, Any]:
         return {
             "max_qubits": 20,
             "supports_statevector": True,
             "supports_noise": True
         }
         
-    def run(self, circuit: Circuit, shots: int = 1024, noise: dict | None = None, seed: int | None = None) -> dict:
+    def run(self, circuit: Circuit, shots: int = 1024, noise: dict[str, Any] | None = None, seed: int | None = None) -> dict[str, Any]:
+        if cirq is None:
+            raise PlatformError("backend_unavailable", "Cirq is not installed in the current environment.")
         # Create qubits
         qubits = [cirq.LineQubit(i) for i in range(circuit.num_qubits)]
         c_circuit = cirq.Circuit()
@@ -54,7 +60,7 @@ class CirqAdapter(BackendAdapter):
             # We must parse it and ensure Qiskit bit-ordering (qubit 0 on the right)
             raw_counts = result.multi_measurement_histogram(keys=[str(i) for i in range(circuit.num_clbits)])
             
-            normalized_counts = {}
+            normalized_counts: dict[str, int] = {}
             for bit_tuple, count in raw_counts.items():
                 # bit_tuple is like (0, 1) for c0=0, c1=1. 
                 # Qiskit expects "10" (c1 c0)
