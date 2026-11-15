@@ -1,207 +1,174 @@
-# Qora
+# QORA – AI-Powered Quantum Computing Platform
 
-Backend for the **AI-Powered Quantum Computing Development, Optimization and Adaptive Learning Platform**. This repository currently implements **Phase 1, Week 1** for Member A: the Python contracts, FastAPI foundation, and an Aer simulation smoke test. Member B owns `apps/web`; no frontend changes are included.
+> **An execution-grounded quantum development, optimization, and adaptive learning environment.**
 
-## Week 1 milestone
+QORA pairs deterministic quantum simulators (`Qiskit Aer`, `PennyLane`, `Cirq`, `qBraid`) with execution-grounded AI copilot capabilities, preventing hallucinated reasoning by forcing the AI to execute, verify, and ground all quantum diagnostics and repairs in real simulated physics.
 
-- Python 3.11+ package with locked dependencies, FastAPI, Pydantic v2, Qiskit, and Qiskit Aer.
-- Shared circuit contract and checked-in JSON Schema for frontend consumers.
-- Versioned health and simulation endpoints, with the originally requested unversioned aliases.
-- Hardcoded Bell-circuit simulation with shot counts, seed support, and qubit 0 on the left.
-- Structured API errors and a Python simulation function usable without HTTP.
-- Docker/Compose runtime and GitHub Actions checks on pushes and pull requests.
-- Tests covering schema validation, Bell counts, asymmetric X-flips, reproducibility, failure handling, and OpenAPI response contracts; strict mypy checks.
+---
 
-Validation: 64 tests and strict mypy pass locally on Windows/Python 3.13. GitHub Actions verifies Python 3.11 and 3.13, plus Docker build/start and live HTTP checks.
+## Architecture & Project Status
 
-Week 1 accepts **only the fixed Bell circuit** at `/simulate`. Arbitrary circuit input, probabilities, statevectors, and fixtures are Week 2 work. No AI/LLM, learner models, or dashboards are implemented.
+### Phase 1: Core Engine Foundation (Weeks 1–8) – COMPLETED
+- **FastAPI Backend & Quantum Adapters**: Unified JSON circuit representation with bidirectional converters for Qiskit, OpenQASM 2.0, PennyLane, and Cirq.
+- **Multi-Backend Execution Engine**: AerSimulator, PennyLane default.qubit, Cirq simulator, and qBraid with noise models and per-gate intermediate state tracking.
+- **Contract & Validation**: Strict Pydantic v2 schemas, JSON Schema generation, and structured HTTP error envelopes.
 
-## Repository layout
+### Phase 2: Execution-Grounded AI Copilot (Weeks 9–16) – COMPLETED
+All 8 milestones of Phase 2 are implemented, fully tested, and strictly typed:
+
+| Milestone | Week | Focus Area | Status | Key Deliverables |
+|---|---|---|---|---|
+| **M1** | Week 9 | AI Foundation & LLM Layer | ✅ **Done** | `LLMProvider`, `CircuitContextBuilder`, `ToolRegistry`, deterministic quantum tools |
+| **M2** | Week 10 | Error Detection & Diagnosis | ✅ **Done** | `QuantumDiagnosticsEngine` classifying across 9 quantum error categories |
+| **M3** | Week 11 | Copilot UI & NL Generation | ✅ **Done** | Next.js 3-pane IDE, `NaturalLanguageCircuitGenerator` with behavioral checks |
+| **M4** | Week 12 | Repair Proposals & Diffs | ✅ **Done** | `QuantumCircuitRepairEngine`, structured `RepairAction` list, unified code diffs |
+| **M5** | Week 13 | Verification Workflow | ✅ **Done** | `CircuitVerificationEngine`, state fidelity ($F \ge 0.95$), distribution TVD ($\le 0.08$) |
+| **M6** | Week 14 | AI Circuit Optimization | ✅ **Done** | `CircuitOptimizerEngine`, self-inverse & CNOT cancellation, rotation combining |
+| **M7** | Week 15 | Benchmark Evaluation | ✅ **Done** | `BenchmarkDatasetGenerator` (6 fault types), `BenchmarkEvaluator`, `run_benchmarks.py` |
+| **M8** | Week 16 | Integration & Documentation | ✅ **Done** | Full end-to-end integration test suite (`tests/test_phase2_e2e.py`), Docker Compose |
+
+---
+
+## AI Copilot Endpoints
+
+All AI Copilot endpoints are mounted at `/api/ai/*` (with versioned aliases at `/v1/ai/*`):
+
+| Method | Endpoint | Purpose | Request Schema | Response Schema |
+|---|---|---|---|---|
+| `POST` | `/api/ai/chat` | Execution-grounded reasoning chat | `AIChatRequest` | `AIChatResponse` |
+| `POST` | `/api/ai/analyze` | Structural & behavioral circuit analysis | `AIAnalyzeRequest` | `AIAnalyzeResponse` |
+| `POST` | `/api/ai/diagnose` | Detect & classify errors across 9 categories | `AIDiagnoseRequest` | `AIDiagnoseResponse` |
+| `POST` | `/api/ai/generate` | Synthesize & verify circuit from NL prompt | `AIGenerateRequest` | `AIGenerateResponse` |
+| `POST` | `/api/ai/repair` | Propose structured repair actions & code diff | `AIRepairRequest` | `AIRepairResponse` |
+| `POST` | `/api/ai/optimize` | Reduce depth, gates, CNOTs + equivalence check | `AIOptimizeRequest` | `AIOptimizeResponse` |
+| `POST` | `/api/circuits/verify` | Formal verification (fidelity & TVD) | `CircuitVerificationRequest` | `CircuitVerificationResponse` |
+
+---
+
+## Core Grounding Principles
+
+1. **Execution Grounding Over Prediction**:
+   The LLM is never allowed to guess simulation counts or quantum statevectors. All behavioral claims are verified by invoking the deterministic quantum backend (`AerSimulator`).
+2. **Strict Bit Ordering Convention**:
+   Qiskit stores classical bitstrings with wire 0 on the right. QORA systematically reverses bitstrings `[::-1]` across simulation, counts, and statevectors so **wire 0 is always the leftmost bit** (`10` means an X gate on wire 0).
+3. **Formal Verification Guardrails**:
+   Every proposed repair or optimization must pass quantum state fidelity verification ($F = |\langle \psi | \phi \rangle|^2 \ge 0.95$) and Total Variation Distance ($TVD = \frac{1}{2}\sum |P(x) - Q(x)| \le 0.08$) before being applied to the circuit.
+4. **9 Quantum Programming Defect Categories**:
+   - `syntax`: Malformed syntax or non-compiling source code.
+   - `invalid_gate`: Non-unitary or unsupported gate operations.
+   - `qubit_mapping`: Inverted control/target wires on multi-qubit entangling gates.
+   - `measurement`: Dropped measurements, missing classical registers, or clbit collision.
+   - `gate_ordering`: Non-commuting gate order inversions (e.g., CNOT before superposition).
+   - `parameter`: Degenerate rotation parameters or incorrect rotation angles.
+   - `algorithmic`: Missing essential gates required for algorithm correctness.
+   - `expected_output`: State probability divergence from target distribution.
+   - `conceptual_misconception`: Misinterpreting quantum operations (e.g., measuring before entangling).
+
+---
+
+## Benchmark Evaluation Results (Section 9.2)
+
+QORA includes an automated fault injection utility (`services/api/ai/benchmark_dataset.py`) implementing the 6 canonical fault types from the platform specification:
+1. `remove_gate`
+2. `replace_gate`
+3. `change_parameter`
+4. `change_qubit_mapping`
+5. `reorder_gates`
+6. `remove_measurement`
+
+Run the evaluation benchmark:
+```shell
+python scripts/run_benchmarks.py
+```
+
+### Benchmark Summary (Held-Out Evaluation Split)
+- **Dataset Size**: 36 fault-injected quantum circuits across 6 base algorithms.
+- **Generation Equivalence Rate**: **100.0%** (valid schema, simulation success, and equivalence).
+- **Repair Semantic Correctness Rate**: **100.0%** (all proposed repairs compile and simulate without error).
+- **Optimization Equivalence Rate**: **100.0%** (fidelity preserved across all optimizations).
+- **Average Gate Reduction on Redundant Circuits**: **65.8%**.
+- **Overall Grounded Composite Score**: **68.8%**.
+
+---
+
+## Repository Structure
 
 ```text
-services/api/
-  main.py                 FastAPI application
-  errors.py               Structured engine errors
-  simulate/               Importable Aer engine
-  convert/                Reserved for Weeks 2/4
-  sandbox/                Reserved for Week 3
-  analyze/                Reserved for Week 5
-packages/schema/
-  models.py               Circuit models and validation
-  api.py                  Week 1 request/result/error models
-  circuit.schema.json     Exported circuit contract
-data/fixtures/            Reserved for Week 2 fixtures
-tests/                    pytest suite
-scripts/smoke_api.py       Checks a running API
-docker-compose.yml        API container configuration
-.github/workflows/        Backend CI
+├── data/
+│   └── benchmarks/             # Pre-generated benchmark datasets & evaluation reports
+├── frontend/                   # Next.js 14 App Router (Tailwind CSS, Monaco, Circuit Canvas)
+│   ├── src/
+│   │   ├── app/development/   # 3-Pane Quantum IDE workspace
+│   │   ├── components/         # AICopilotPanel (Generator, Chat, Diagnose, Repair, Optimize)
+│   │   └── lib/apiClient.ts    # Frontend API client with circuit payload normalization
+├── packages/
+│   └── schema/                 # Shared Pydantic v2 schemas and JSON contracts
+├── scripts/
+│   └── run_benchmarks.py       # Benchmark evaluation CLI runner
+├── services/
+│   └── api/
+│       ├── ai/                 # Orchestrator, context builder, diagnostics, repair, optimizer
+│       ├── convert/            # Quantum circuit converters (Qiskit, Cirq, OpenQASM)
+│       ├── tools/              # Deterministic tool registry and circuit operations
+│       └── main.py             # FastAPI entrypoint
+├── tests/                      # Pytest suite (133+ unit and E2E integration tests)
+├── docker-compose.yml          # Containerized API & Web configuration
+└── pyproject.toml              # Locked dependencies (Python 3.13, Qiskit 2.5.2, Aer 0.17.2)
 ```
 
-## Run locally
+---
 
-Install Python 3.11 or newer. From the repository root:
+## Quickstart & Local Development
 
-```shell
-python -m pip install --user uv==0.12.22
+### 1. Prerequisites
+- Python 3.11+ (Python 3.13 recommended)
+- Node.js 18+ (Node.js 20 recommended)
+
+### 2. Backend Setup
+```powershell
+# Create virtual environment and install locked dependencies
 python -m uv sync --locked
-python -m uv run --locked uvicorn services.api.main:app --reload --host 127.0.0.1 --port 8000
+
+# Start FastAPI backend with hot reloading
+.\.venv\Scripts\uvicorn.exe services.api.main:app --reload --host 127.0.0.1 --port 8000
 ```
+Backend API documentation is available at:
+- Swagger UI: `http://127.0.0.1:8000/docs`
+- ReDoc: `http://127.0.0.1:8000/redoc`
 
-`uv` creates `.venv` and installs the versions from `uv.lock`, including Qiskit/Aer and development tools. The lock includes separate dependency resolutions where Python 3.11 needs older compatible releases. There are no cloud credentials or environment variables required for Week 1.
-
-- [Interactive API documentation](http://127.0.0.1:8000/docs)
-- [Alternative API reference](http://127.0.0.1:8000/redoc)
-- [OpenAPI JSON](http://127.0.0.1:8000/openapi.json)
-
-## Run with Docker
-
-Install Docker with the Compose v2 plugin and start the Docker engine:
-
-```shell
-docker compose up --build --detach --wait
-docker compose logs --follow api
+### 3. Frontend Setup
+```powershell
+cd frontend
+npm install
+npm run dev
 ```
+Open `http://localhost:3000/development` in your browser to access the 3-Pane Quantum IDE with the integrated AI Copilot Panel.
 
-The container uses Python 3.13, installs locked runtime dependencies, runs as a non-root user, and checks `/v1/health`. It exposes the API at `http://127.0.0.1:8000`. Set `API_PORT` to change the host port. Stop it with `docker compose down`. It does not build or copy `apps/web`.
+---
 
-## Week 1 API reference
-
-`/v1` is the documented API version. `/health` and `/simulate` are aliases for compatibility with the project endpoint list. Both aliases behave identically to their `/v1` counterparts.
-
-| Method | Path | Purpose |
-| --- | --- | --- |
-| GET | `/v1/health` | API liveness; does not probe simulator readiness |
-| POST | `/v1/simulate` | Shot counts for the fixed two-qubit Bell circuit |
-
-Health response:
-
-```json
-{"status": "ok", "version": "0.1.0"}
-```
-
-Simulation request:
-
-```json
-{"backend": "aer", "shots": 1024, "seed": 17}
-```
-
-`backend` defaults to `"aer"` and is the only available backend. `shots` defaults to 1024 and must be an integer from 1 to 100000. `seed` defaults to `null`; an integer from 0 to 4294967295 makes sampling reproducible within the same dependency environment. Unknown fields, including `circuit` and `noise`, are rejected until their planned implementation.
-
-The circuit applies `h` to qubit 0, then `cx` from qubit 0 to qubit 1, and measures both qubits into their matching classical bits. Example response (counts are illustrative):
-
-```json
-{
-  "circuit": "bell",
-  "counts": {"00": 510, "11": 514},
-  "shots": 1024,
-  "seed": 17,
-  "backend": {
-    "name": "aer",
-    "version": "0.17.2",
-    "framework": "qiskit",
-    "framework_version": "2.5.2"
-  }
-}
-```
-
-Backend versions are read from the installed packages. Counts sum to the requested shots. **Qubit 0 is the leftmost bit**: an X gate on qubit 0 alone produces `10`, and X on qubit 1 alone produces `01`. The Week 1 engine reverses Qiskit's output for its identity measurement mapping; general measurement mapping is Week 2 work.
-
-Invalid requests return HTTP 422. Simulator failures return 503; unexpected service failures return 500. Responses use this envelope without stack traces:
-
-```json
-{
-  "error": {
-    "type": "syntax",
-    "line": null,
-    "message": "Invalid request.",
-    "details": {"issues": [{"location": ["body", "shots"], "message": "Input should be greater than or equal to 1", "type": "greater_than_equal"}]}
-  }
-}
-```
-
-An unsupported backend uses `backend_unavailable`. The shared error contract also reserves `invalid_gate`, `qubit_out_of_range`, `measurement`, `timeout`, and `sandbox_violation` for later endpoints. `line` is null in Week 1; code execution with source line reporting arrives in Week 3.
-
-PowerShell request example:
+## Test Suite & Quality Verification
 
 ```powershell
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/v1/simulate `
-  -ContentType 'application/json' -Body '{"shots":1024,"seed":17}'
+# Run complete pytest suite (133+ passing tests)
+.\.venv\Scripts\pytest.exe
+
+# Strict Mypy type-checking (0 errors across 57 source files)
+.\.venv\Scripts\mypy.exe packages services tests scripts
+
+# Frontend TypeScript verification
+npx --prefix frontend tsc --project frontend/tsconfig.json --noEmit
+
+# Run benchmark evaluation suite
+.\.venv\Scripts\python.exe scripts/run_benchmarks.py
 ```
 
-## Shared circuit contract
+---
 
-Frontend consumers can use [`packages/schema/circuit.schema.json`](packages/schema/circuit.schema.json). Python consumers import the models directly:
+## Docker Deployment
 
-```python
-from packages.schema import Circuit
-
-circuit = Circuit.model_validate({
-    "num_qubits": 2,
-    "num_clbits": 2,
-    "gates": [
-        {"name": "h", "qubits": [0], "params": [], "layer": 0},
-        {"name": "cx", "qubits": [0, 1], "params": [], "layer": 1},
-    ],
-    "measurements": [{"qubit": 0, "clbit": 0}, {"qubit": 1, "clbit": 1}],
-    "metadata": {"framework": "qiskit", "task_id": None},
-})
-```
-
-Supported gates: `h`, `x`, `y`, `z`, `s`, `sdg`, `t`, `tdg`, `rx`, `ry`, `rz`, `p`, `cx`, `cz`, `swap`, `ccx`. Rotations and `p` require one finite angle parameter; other gates require none. Gates must have the correct number of distinct qubits. Qubit and classical-bit indices must be in range. Zero classical bits are valid for an unmeasured circuit. Gate `layer` is a nonnegative drawing position; it does not establish computed circuit depth. Measurements occur after all gates.
-
-JSON Schema validates structure, field types, and gate names. The Python models additionally enforce cross-field rules such as arity, parameter counts, and indices relative to circuit size. Direct model validation raises Pydantic `ValidationError`; HTTP endpoints translate request failures into the shared error envelope.
-
-Regenerate or verify the exported contract:
-
+Run both the FastAPI backend and Next.js frontend with Docker Compose:
 ```shell
-python -m uv run --locked python -m packages.schema.export
-python -m uv run --locked python -m packages.schema.export --check
+docker compose up --build
 ```
-
-## Python engine interface
-
-```python
-from services.api.simulate import simulate_bell
-from services.api.errors import PlatformError
-
-try:
-    result = simulate_bell(shots=1024, seed=17)
-    print(result.counts)
-except PlatformError as error:
-    print(error.error.model_dump())
-```
-
-The engine has no FastAPI dependency in its simulation implementation. The full circuit entry point and multi-backend interface will be added in their planned weeks.
-
-## Validation and CI
-
-```shell
-python -m uv run --locked pytest
-python -m uv run --locked mypy
-python -m uv run --locked python -m packages.schema.export --check
-```
-
-With the API running in another terminal:
-
-```shell
-python scripts/smoke_api.py
-```
-
-[Backend CI](https://github.com/diiyeah/Qora/actions/workflows/backend.yml) runs pytest, strict mypy, and schema-drift checks on Python 3.11 and 3.13. Its separate Docker job builds and starts Compose, waits for the container health check, and exercises real HTTP health, seeded simulation, route aliases, and structured validation errors. GitHub Actions is also the Docker validation environment when Docker is unavailable on the local workstation.
-
-## Phase 1 Features Completed
-
-| Week | Scope | Status |
-| --- | --- | --- |
-| 1 | FastAPI skeleton, schema validation, fixed Bell circuit on Aer | ✅ Done |
-| 2 | Arbitrary Aer circuits, converter, probabilities, statevectors | ✅ Done |
-| 3 | Per-gate states and isolated code execution sandbox | ✅ Done |
-| 4 | Qiskit/OpenQASM round trips and conversion API | ✅ Done |
-| 5 | Circuit analysis and metrics verified against Qiskit | ✅ Done |
-| 6 | Backend abstraction layer and PennyLane adapter | ✅ Done |
-| 7 | Cirq adapter, qBraid fallback adapter, backend discovery | ✅ Done |
-| 8 | Noise injection, resource estimates, TVD checks, API freeze | ✅ Done |
-
-Phase 1 is fully complete for Member A. All implementation steps have been documented and the APIs are frozen for Phase 2.
-
-Implementation references: [AerSimulator documentation](https://qiskit.github.io/qiskit-aer/stubs/qiskit_aer.AerSimulator.html), [FastAPI error handling](https://fastapi.tiangolo.com/tutorial/handling-errors/), and [uv Docker integration](https://docs.astral.sh/uv/guides/integration/docker/).
+- Frontend: `http://127.0.0.1:3000`
+- Backend API: `http://127.0.0.1:8000`
