@@ -76,7 +76,8 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
         setOptBanner('Circuit is already in optimal canonical form.');
       }
     } catch (err: any) {
-      setOptError(err.message || 'Circuit optimization failed.');
+      const msg = err.response?.data?.error?.message || err.message || 'Circuit optimization failed.';
+      setOptError(msg);
     } finally {
       setIsOptimizing(false);
     }
@@ -103,7 +104,8 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
       const res = await QuantumAPI.aiGenerate(prompt);
       setGeneratedResult(res);
     } catch (err: any) {
-      setGenError(err.message || 'Circuit generation failed.');
+      const msg = err.response?.data?.error?.message || err.message || 'Circuit generation failed.';
+      setGenError(msg);
     } finally {
       setIsGenerating(false);
     }
@@ -145,7 +147,8 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
       const res = await QuantumAPI.aiDiagnose(currentCircuit, currentCode);
       setDiagnosisResult(res.diagnosis);
     } catch (err: any) {
-      setDiagError(err.message || 'Diagnosis failed.');
+      const msg = err.response?.data?.error?.message || err.message || 'Diagnosis failed.';
+      setDiagError(msg);
     } finally {
       setIsDiagnosing(false);
     }
@@ -160,7 +163,8 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
       setRepairProposal(res.proposal);
       setRepairIteration(res.iteration);
     } catch (err: any) {
-      setRepairError(err.message || 'Repair proposal generation failed.');
+      const msg = err.response?.data?.error?.message || err.message || 'Repair proposal generation failed.';
+      setRepairError(msg);
     } finally {
       setIsRepairing(false);
     }

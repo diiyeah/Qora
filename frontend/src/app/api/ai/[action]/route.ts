@@ -35,11 +35,24 @@ export async function POST(
       body: JSON.stringify(body),
     });
 
-    const data = await backendRes.json();
-    return NextResponse.json(data, { status: backendRes.status });
+    const rawText = await backendRes.text();
+    try {
+      const data = JSON.parse(rawText);
+      return NextResponse.json(data, { status: backendRes.status });
+    } catch {
+      return NextResponse.json(
+        { error: { type: 'backend_response_error', message: rawText || 'Invalid response from quantum backend' } },
+        { status: backendRes.status || 500 }
+      );
+    }
   } catch (error: any) {
     return NextResponse.json(
-      { error: { type: 'gateway_error', message: error.message || 'AI service error' } },
+      {
+        error: {
+          type: 'gateway_error',
+          message: `Unable to connect to Quantum Backend at ${BACKEND_URL}: ${error.message || 'Connection failed'}`,
+        },
+      },
       { status: 502 }
     );
   }
