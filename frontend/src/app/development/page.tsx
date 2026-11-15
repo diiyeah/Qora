@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { CodeEditor } from '@/components/CodeEditor';
 import { ResultsPanel } from '@/components/ResultsPanel';
 import { CircuitBuilder } from '@/components/circuit/CircuitBuilder';
+import { AICopilotPanel } from '@/components/AICopilotPanel';
 import { QuantumAPI, SimulateResponse, CircuitSchema } from '@/lib/apiClient';
 
 export default function DevelopmentMode() {
@@ -274,7 +275,7 @@ export default function DevelopmentMode() {
         </div>
         
         {/* Right Pane: AI Copilot */}
-        <div className="w-80 border-l border-borders bg-panels flex flex-col shrink-0">
+        <div className="w-80 border-l border-borders bg-panels flex flex-col shrink-0 overflow-hidden">
           <div className="h-10 border-b border-borders flex items-center px-4 shrink-0">
             <span className="text-sm font-medium text-primary flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -282,30 +283,15 @@ export default function DevelopmentMode() {
             </span>
           </div>
           
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-             {/* Evidence-based AI Card Placeholder */}
-             <div className="panel p-3 border-l-4 border-l-primary">
-                <p className="text-sm text-textMain mb-2">✦ I am analyzing your workspace.</p>
-                <p className="text-xs text-muted mb-3">Awaiting execution data to provide insights...</p>
-                <button className="w-full text-xs py-1.5 bg-background border border-borders rounded text-textMain hover:border-primary transition-colors">
-                  Optimize Circuit
-                </button>
-             </div>
-             
-             {error && (
-                <div className="panel p-3 border-l-4 border-l-error">
-                  <p className="text-sm font-medium text-error flex items-center gap-2 mb-2">
-                    ⚠ Execution Mismatch
-                  </p>
-                  <p className="text-xs text-textMain mb-2">Your circuit failed to execute or validate properly.</p>
-                  <div className="bg-background rounded p-2 text-xs text-muted mb-3 font-mono">
-                    {error}
-                  </div>
-                  <button className="w-full text-xs py-1.5 bg-background border border-borders rounded text-textMain hover:border-error transition-colors">
-                    Diagnose Issue
-                  </button>
-                </div>
-             )}
+          <div className="flex-1 overflow-hidden">
+            <AICopilotPanel
+              currentCircuit={schema}
+              currentCode={code}
+              onApplyCircuit={(newCircuit) => {
+                updateSchemaWithHistory(newCircuit);
+                setActiveTab('builder');
+              }}
+            />
           </div>
         </div>
         

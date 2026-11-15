@@ -75,5 +75,33 @@ export const QuantumAPI = {
   getBackends: async () => {
     const response = await apiClient.get('/backends');
     return response.data;
-  }
+  },
+
+  aiChat: async (query: string, circuit?: CircuitSchema, expectedBehavior?: string) => {
+    const response = await apiClient.post('/ai/chat', {
+      query,
+      circuit,
+      expected_behavior: expectedBehavior,
+    });
+    return response.data;
+  },
+
+  aiDiagnose: async (circuit?: CircuitSchema, sourceCode?: string, expectedBehavior?: string) => {
+    const response = await apiClient.post('/ai/diagnose', {
+      circuit,
+      source_code: sourceCode,
+      expected_behavior: expectedBehavior,
+    });
+    return response.data;
+  },
+
+  aiGenerate: async (prompt: string) => {
+    const response = await apiClient.post('/ai/generate', { prompt });
+    return response.data;
+  },
+
+  aiAnalyze: async (circuit: CircuitSchema) => {
+    const response = await apiClient.post('/ai/analyze', { circuit });
+    return response.data;
+  },
 };

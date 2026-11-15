@@ -108,3 +108,20 @@ class AIDiagnoseResponse(ContractModel):
     diagnosis: ErrorDiagnosis
     tool_calls: list[ToolCallRecord] = Field(default_factory=list)
 
+
+class AIGenerateRequest(ContractModel):
+    prompt: str
+    shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
+    seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+
+class AIGenerateResponse(ContractModel):
+    circuit: Circuit
+    explanation: str
+    distribution: dict[str, float]
+    statevector: dict[str, str] | None = None
+    evidence: ExecutionEvidence
+    validation_passed: bool = True
+    tool_calls: list[ToolCallRecord] = Field(default_factory=list)
+
+

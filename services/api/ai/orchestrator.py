@@ -9,6 +9,8 @@ from packages.schema.ai import (
     AIChatResponse,
     AIDiagnoseRequest,
     AIDiagnoseResponse,
+    AIGenerateRequest,
+    AIGenerateResponse,
     CircuitAnalysis,
     ErrorDiagnosis,
     ExecutionEvidence,
@@ -17,6 +19,7 @@ from packages.schema.ai import (
 from packages.schema.models import Circuit
 from services.api.ai.context_builder import CircuitContext, CircuitContextBuilder
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
+from services.api.ai.generator import NaturalLanguageCircuitGenerator
 from services.api.ai.llm_client import LLMProvider, get_llm_provider
 from services.api.tools.circuit_ops import (
     analyze_circuit,
@@ -168,4 +171,14 @@ class AIOrchestrator:
                 )
             ],
         )
+
+    def generate(self, request: AIGenerateRequest) -> AIGenerateResponse:
+        """Synthesize, validate, and simulate quantum circuit from natural language."""
+        generator = NaturalLanguageCircuitGenerator(llm_provider=self.llm_provider)
+        return generator.generate(
+            prompt=request.prompt,
+            shots=request.shots,
+            seed=request.seed,
+        )
+
 

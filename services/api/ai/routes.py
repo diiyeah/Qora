@@ -9,6 +9,8 @@ from packages.schema.ai import (
     AIChatResponse,
     AIDiagnoseRequest,
     AIDiagnoseResponse,
+    AIGenerateRequest,
+    AIGenerateResponse,
 )
 from packages.schema.api import ErrorResponse
 from services.api.ai.orchestrator import AIOrchestrator
@@ -41,4 +43,11 @@ def ai_analyze(request: AIAnalyzeRequest) -> AIAnalyzeResponse:
 def ai_diagnose(request: AIDiagnoseRequest) -> AIDiagnoseResponse:
     """Detect and classify errors across 9 quantum programming error categories."""
     return _orchestrator.diagnose(request)
+
+
+@router.post("/generate", response_model=AIGenerateResponse)
+def ai_generate(request: AIGenerateRequest) -> AIGenerateResponse:
+    """Generate, validate, and simulate quantum circuits from natural language instructions."""
+    return _orchestrator.generate(request)
+
 

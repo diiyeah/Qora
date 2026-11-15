@@ -7,6 +7,7 @@ from packages.schema.ai import (
     AIAnalyzeResponse,
     AIChatResponse,
     AIDiagnoseResponse,
+    AIGenerateResponse,
 )
 from services.api.main import app
 
@@ -107,4 +108,25 @@ def test_ai_diagnose_endpoint(prefix: str) -> None:
     assert data.diagnosis.category == "gate_ordering"
     assert data.diagnosis.confidence > 0.9
     assert data.diagnosis.suggested_fix
+
+
+@pytest.mark.parametrize("prefix", ["/api/ai", "/v1/ai"])
+def test_ai_generate_endpoint(prefix: str) -> None:
+    with TestClient(app) as client:
+        resp = client.post(
+            f"{prefix}/generate",
+            json={
+                "prompt": "Create a two-qubit Bell state",
+                "shots": 1024,
+                "seed": 42,
+            },
+        )
+    assert resp.status_code == 200
+    data = AIGenerateResponse.model_validate(resp.json())
+    assert data.circuit.num_qubits == 2
+    assert len(data.circuit.gates) == 2
+    assert data.validation_passed is True
+    assert "00" in data.distribution
+    assert "11" in data.distribution
+
 
