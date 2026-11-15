@@ -14,6 +14,8 @@ from packages.schema.ai import (
     AIRepairRequest,
     AIRepairResponse,
     CircuitAnalysis,
+    CircuitVerificationRequest,
+    CircuitVerificationResponse,
     ErrorDiagnosis,
     ExecutionEvidence,
     ToolCallRecord,
@@ -23,6 +25,7 @@ from services.api.ai.context_builder import CircuitContext, CircuitContextBuilde
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
 from services.api.ai.generator import NaturalLanguageCircuitGenerator
 from services.api.ai.repair_engine import QuantumCircuitRepairEngine
+from services.api.ai.verification import CircuitVerificationEngine
 from services.api.ai.llm_client import LLMProvider, get_llm_provider
 from services.api.tools.circuit_ops import (
     analyze_circuit,
@@ -209,6 +212,26 @@ class AIOrchestrator:
                 )
             ],
         )
+
+    def verify(self, request: CircuitVerificationRequest) -> CircuitVerificationResponse:
+        """Formally verify quantum circuit fidelity, TVD, and behavioral equivalence."""
+        res = CircuitVerificationEngine.verify(
+            circuit=request.circuit,
+            reference_circuit=request.reference_circuit,
+            expected_behavior=request.expected_behavior,
+            expected_distribution=request.expected_distribution,
+            shots=request.shots,
+            seed=request.seed,
+        )
+        res.tool_calls = [
+            ToolCallRecord(
+                tool="verify_circuit",
+                args={"outcome": res.outcome, "equivalent": res.equivalent},
+                result={"fidelity": res.fidelity, "tvd": res.tvd},
+            )
+        ]
+        return res
+
 
 
 

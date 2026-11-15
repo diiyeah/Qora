@@ -8,8 +8,10 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 
+from packages.schema.ai import CircuitVerificationRequest, CircuitVerificationResponse
 from packages.schema.api import ErrorInfo, ErrorResponse, SimulationRequest, SimulationResult
 from services.api.ai import ai_router
+from services.api.ai.verification import CircuitVerificationEngine
 from services.api.errors import PlatformError
 from services.api.simulate import simulate_bell
 from packages.schema.models import Circuit
@@ -156,8 +158,34 @@ def convert(request: ConvertRequest) -> dict[str, Any]:
     return {"converted": "Not implemented"}
 
 
+circuits_router = APIRouter(
+    tags=["circuits"],
+    responses={
+        422: {"model": ErrorResponse},
+        500: {"model": ErrorResponse},
+        503: {"model": ErrorResponse},
+    },
+)
+
+
+@circuits_router.post("/verify", response_model=CircuitVerificationResponse)
+def verify_circuit_endpoint(request: CircuitVerificationRequest) -> CircuitVerificationResponse:
+    """Formally verify quantum circuit fidelity, TVD, and behavioral equivalence."""
+    return CircuitVerificationEngine.verify(
+        circuit=request.circuit,
+        reference_circuit=request.reference_circuit,
+        expected_behavior=request.expected_behavior,
+        expected_distribution=request.expected_distribution,
+        shots=request.shots,
+        seed=request.seed,
+    )
+
+
 app.include_router(router, prefix="/v1")
 app.include_router(router, include_in_schema=False)
 app.include_router(ai_router, prefix="/api/ai")
 app.include_router(ai_router, prefix="/v1/ai", include_in_schema=False)
+app.include_router(circuits_router, prefix="/api/circuits")
+app.include_router(circuits_router, prefix="/v1/circuits", include_in_schema=False)
+
 

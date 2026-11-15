@@ -224,4 +224,37 @@ class AIRepairResponse(ContractModel):
     tool_calls: list[ToolCallRecord] = Field(default_factory=list)
 
 
+class CircuitVerificationRequest(ContractModel):
+    circuit: Circuit
+    reference_circuit: Circuit | None = None
+    expected_behavior: str | None = None
+    expected_distribution: dict[str, float] | None = None
+    shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
+    seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        res = _normalize_circuit_dict(data)
+        if isinstance(res, dict) and "reference_circuit" in res and isinstance(res["reference_circuit"], dict):
+            ref_wrapper = {"circuit": res["reference_circuit"]}
+            norm_ref = _normalize_circuit_dict(ref_wrapper)
+            res["reference_circuit"] = norm_ref["circuit"]
+        return res
+
+
+class CircuitVerificationResponse(ContractModel):
+    validation_status: Literal["passed", "failed"] = "passed"
+    execution_status: Literal["success", "error"] = "success"
+    outcome: Literal["verified", "failed"] = "verified"
+    fidelity: float | None = None
+    tvd: float | None = None
+    equivalent: bool = False
+    expected_vs_observed: dict[str, dict[str, float]] = Field(default_factory=dict)
+    evidence: ExecutionEvidence
+    details: list[str] = Field(default_factory=list)
+    tool_calls: list[ToolCallRecord] = Field(default_factory=list)
+
+
+
 

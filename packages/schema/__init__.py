@@ -15,6 +15,8 @@ from .ai import (
     AIRepairResponse,
     CircuitAnalysis,
     CircuitComparison,
+    CircuitVerificationRequest,
+    CircuitVerificationResponse,
     ErrorCategory,
     ErrorDiagnosis,
     ExecutionEvidence,
@@ -29,6 +31,7 @@ __all__ = [
     "AIChatRequest", "AIChatResponse", "AIAnalyzeRequest", "AIAnalyzeResponse",
     "AIDiagnoseRequest", "AIDiagnoseResponse", "AIGenerateRequest", "AIGenerateResponse",
     "AIRepairRequest", "AIRepairResponse", "RepairAction", "RepairProposal",
+    "CircuitVerificationRequest", "CircuitVerificationResponse",
     "ErrorDiagnosis", "CircuitAnalysis", "CircuitComparison", "ErrorCategory",
     "ExecutionEvidence", "ToolCallRecord",
 ]

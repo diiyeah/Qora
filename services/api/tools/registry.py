@@ -7,6 +7,7 @@ from typing import Any
 from packages.schema.models import Circuit
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
 from services.api.ai.repair_engine import QuantumCircuitRepairEngine
+from services.api.ai.verification import CircuitVerificationEngine
 from services.api.errors import PlatformError
 from services.api.tools.circuit_ops import (
     analyze_circuit,
@@ -207,9 +208,20 @@ class ToolRegistry:
 
         self.register(
             name="verify_circuit",
-            description="Verify circuit fidelity and correctness against expected behavior (reserved for M5).",
-            handler=lambda circuit, **kwargs: {"status": "verify_circuit ready for M5 integration"},
-            parameters=circuit_param_schema,
+            description="Verify circuit fidelity, TVD, and correctness against reference or expected behavior.",
+            handler=CircuitVerificationEngine.verify,
+            parameters={
+                "type": "object",
+                "properties": {
+                    "circuit": {"type": "object", "description": "Canonical QORA circuit to verify"},
+                    "reference_circuit": {"type": "object", "description": "Reference circuit", "nullable": True},
+                    "expected_behavior": {"type": "string", "nullable": True},
+                    "expected_distribution": {"type": "object", "nullable": True},
+                    "shots": {"type": "integer", "default": 1024},
+                    "seed": {"type": "integer", "nullable": True},
+                },
+                "required": ["circuit"],
+            },
         )
 
 
