@@ -1,0 +1,5888 @@
+{
+  "records": [
+    {
+      "circuit_id": "qora-bench-bell_state-remove_gate",
+      "name": "bell_state with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "h",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-bell_state-replace_gate",
+      "name": "bell_state with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "h",
+        "replacement_gate": "z",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-bell_state-change_parameter",
+      "name": "bell_state with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.0472
+            ],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rx",
+        "new_param": 1.0472,
+        "index": 0
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-bell_state-change_qubit_mapping",
+      "name": "bell_state with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "cx",
+        "old_qubits": [
+          0,
+          1
+        ],
+        "new_qubits": [
+          1,
+          0
+        ],
+        "index": 1
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-bell_state-reorder_gates",
+      "name": "bell_state with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "h",
+          "cx"
+        ]
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-bell_state-remove_measurement",
+      "name": "bell_state with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 2
+      },
+      "expected_behavior": "Two-qubit Bell state with 50/50 superposition of |00> and |11>",
+      "expected_distribution": {
+        "00": 0.5088,
+        "11": 0.4912
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-remove_gate",
+      "name": "ghz_state with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "h",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-replace_gate",
+      "name": "ghz_state with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "h",
+        "replacement_gate": "z",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-change_parameter",
+      "name": "ghz_state with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.0472
+            ],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rx",
+        "new_param": 1.0472,
+        "index": 0
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-change_qubit_mapping",
+      "name": "ghz_state with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "cx",
+        "old_qubits": [
+          0,
+          1
+        ],
+        "new_qubits": [
+          1,
+          0
+        ],
+        "index": 1
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-reorder_gates",
+      "name": "ghz_state with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "h",
+          "cx"
+        ]
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-ghz_state-remove_measurement",
+      "name": "ghz_state with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 3
+      },
+      "expected_behavior": "Three-qubit GHZ entangled state |000> + |111>",
+      "expected_distribution": {
+        "000": 0.4785,
+        "111": 0.5215
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-remove_gate",
+      "name": "superposition_3 with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "h",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-replace_gate",
+      "name": "superposition_3 with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "h",
+        "replacement_gate": "z",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-change_parameter",
+      "name": "superposition_3 with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.0472
+            ],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rx",
+        "new_param": 1.0472,
+        "index": 0
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-change_qubit_mapping",
+      "name": "superposition_3 with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "h",
+        "old_qubits": [
+          0
+        ],
+        "new_qubits": [
+          1
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-reorder_gates",
+      "name": "superposition_3 with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "h",
+          "h"
+        ]
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-superposition_3-remove_measurement",
+      "name": "superposition_3 with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 3
+      },
+      "expected_behavior": "Equal superposition across 3 qubits (8 uniform outcomes)",
+      "expected_distribution": {
+        "000": 0.1064,
+        "001": 0.1221,
+        "010": 0.1377,
+        "011": 0.1123,
+        "100": 0.1387,
+        "101": 0.1309,
+        "110": 0.1201,
+        "111": 0.1318
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          },
+          {
+            "qubit": 2,
+            "clbit": 2
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-remove_gate",
+      "name": "quantum_swap with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "x",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-replace_gate",
+      "name": "quantum_swap with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "x",
+        "replacement_gate": "z",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-change_parameter",
+      "name": "quantum_swap with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.0472
+            ],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rx",
+        "new_param": 1.0472,
+        "index": 0
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-change_qubit_mapping",
+      "name": "quantum_swap with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "cx",
+        "old_qubits": [
+          0,
+          1
+        ],
+        "new_qubits": [
+          1,
+          0
+        ],
+        "index": 1
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-reorder_gates",
+      "name": "quantum_swap with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "x",
+          "cx"
+        ]
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-quantum_swap-remove_measurement",
+      "name": "quantum_swap with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 2
+      },
+      "expected_behavior": "Quantum swap circuit exchanging state of qubit 0 and qubit 1",
+      "expected_distribution": {
+        "01": 1.0
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          },
+          {
+            "qubit": 1,
+            "clbit": 1
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-remove_gate",
+      "name": "phase_rotation with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "h",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-replace_gate",
+      "name": "phase_rotation with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "h",
+        "replacement_gate": "z",
+        "target_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-change_parameter",
+      "name": "phase_rotation with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              2.3562
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rz",
+        "old_param": 1.5708,
+        "new_param": 2.3562,
+        "index": 1
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-change_qubit_mapping",
+      "name": "phase_rotation with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "h",
+        "old_qubits": [
+          0
+        ],
+        "new_qubits": [
+          0
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-reorder_gates",
+      "name": "phase_rotation with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "h",
+          "rz"
+        ]
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-phase_rotation-remove_measurement",
+      "name": "phase_rotation with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 1
+      },
+      "expected_behavior": "Single qubit interference with pi/2 phase rotation",
+      "expected_distribution": {
+        "0": 0.5137,
+        "1": 0.4863
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "params": [
+              1.5708
+            ],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 2
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-remove_gate",
+      "name": "deutsch_jozsa with injected remove_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 3
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_gate",
+      "error_category": "algorithmic",
+      "fault_location": {
+        "removed_gate": "x",
+        "target_qubits": [
+          1
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected remove_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-replace_gate",
+      "name": "deutsch_jozsa with injected replace_gate",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "replace_gate",
+      "error_category": "invalid_gate",
+      "fault_location": {
+        "original_gate": "x",
+        "replacement_gate": "z",
+        "target_qubits": [
+          1
+        ],
+        "index": 0
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected replace_gate fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-change_parameter",
+      "name": "deutsch_jozsa with injected change_parameter",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "params": [
+              1.0472
+            ],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_parameter",
+      "error_category": "parameter",
+      "fault_location": {
+        "gate": "rx",
+        "new_param": 1.0472,
+        "index": 0
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected change_parameter fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-change_qubit_mapping",
+      "name": "deutsch_jozsa with injected change_qubit_mapping",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              1,
+              0
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "change_qubit_mapping",
+      "error_category": "qubit_mapping",
+      "fault_location": {
+        "gate": "cx",
+        "old_qubits": [
+          0,
+          1
+        ],
+        "new_qubits": [
+          1,
+          0
+        ],
+        "index": 3
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected change_qubit_mapping fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-reorder_gates",
+      "name": "deutsch_jozsa with injected reorder_gates",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "reorder_gates",
+      "error_category": "gate_ordering",
+      "fault_location": {
+        "swapped_indices": [
+          0,
+          1
+        ],
+        "gates": [
+          "x",
+          "h"
+        ]
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected reorder_gates fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "held_out"
+    },
+    {
+      "circuit_id": "qora-bench-deutsch_jozsa-remove_measurement",
+      "name": "deutsch_jozsa with injected remove_measurement",
+      "original_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "faulty_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "fault_type": "remove_measurement",
+      "error_category": "measurement",
+      "fault_location": {
+        "action": "dropped_all_measurements",
+        "original_count": 1
+      },
+      "expected_behavior": "Deutsch-Jozsa 1-bit balanced oracle identifying non-constant function",
+      "expected_distribution": {
+        "1": 1.0
+      },
+      "actual_behavior": "Injected remove_measurement fault causing erroneous quantum state.",
+      "corrected_circuit": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 0
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 1
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "params": [],
+            "layer": 2
+          },
+          {
+            "name": "cx",
+            "qubits": [
+              0,
+              1
+            ],
+            "params": [],
+            "layer": 3
+          },
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "params": [],
+            "layer": 4
+          }
+        ],
+        "measurements": [
+          {
+            "qubit": 0,
+            "clbit": 0
+          }
+        ],
+        "metadata": {
+          "framework": "qiskit",
+          "task_id": null
+        }
+      },
+      "split": "development"
+    }
+  ],
+  "created_at": "2026-11-15T11:14:58.113809+00:00",
+  "version": "1.0.0",
+  "summary": {
+    "total_records": 36,
+    "development_records": 12,
+    "held_out_records": 24,
+    "unique_base_circuits": 6,
+    "unique_fault_types": 6
+  }
+}

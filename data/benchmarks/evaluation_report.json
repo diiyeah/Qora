@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-11-15T11:14:58.910623+00:00",
+  "dataset_split": "held_out",
+  "diagnosis": {
+    "total_cases": 24,
+    "classification_accuracy": 0.5833,
+    "localization_accuracy": 0.8333,
+    "precision": 0.619,
+    "recall": 0.3889,
+    "f1_score": 0.4464,
+    "per_category_metrics": {
+      "algorithmic": {
+        "precision": 0.7143,
+        "recall": 0.8333,
+        "f1": 0.7692
+      },
+      "expected_output": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "invalid_gate": {
+        "precision": 1.0,
+        "recall": 0.8333,
+        "f1": 0.9091
+      },
+      "qubit_mapping": {
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1": 0.5
+      },
+      "gate_ordering": {
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1": 0.5
+      },
+      "measurement": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  "repair": {
+    "total_cases": 24,
+    "repair_success_rate": 0.375,
+    "semantic_correctness_rate": 1.0,
+    "avg_iterations": 1.0,
+    "invalid_repair_rate": 0.0,
+    "avg_fidelity": 0.5312
+  },
+  "generation": {
+    "total_cases": 4,
+    "schema_validation_rate": 1.0,
+    "execution_success_rate": 1.0,
+    "equivalence_rate": 1.0
+  },
+  "optimization": {
+    "total_cases": 4,
+    "avg_gate_reduction_percent": 65.84,
+    "avg_depth_reduction_percent": 65.84,
+    "avg_cnot_reduction_percent": 50.0,
+    "equivalence_verification_rate": 1.0
+  },
+  "overall_score": 0.6875
+}

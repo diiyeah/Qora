@@ -24,7 +24,15 @@ from .ai import (
     ExecutionEvidence,
     OptimizationMetrics,
     OptimizationTransformation,
+    BenchmarkDataset,
+    BenchmarkEvaluationReport,
+    BenchmarkRecord,
+    DiagnosisEvaluationMetrics,
+    FaultInjectionType,
+    GenerationEvaluationMetrics,
+    OptimizationEvaluationMetrics,
     RepairAction,
+    RepairEvaluationMetrics,
     RepairProposal,
     ToolCallRecord,
 )
@@ -39,4 +47,7 @@ __all__ = [
     "CircuitVerificationRequest", "CircuitVerificationResponse",
     "ErrorDiagnosis", "CircuitAnalysis", "CircuitComparison", "ErrorCategory",
     "ExecutionEvidence", "ToolCallRecord",
+    "BenchmarkDataset", "BenchmarkEvaluationReport", "BenchmarkRecord",
+    "DiagnosisEvaluationMetrics", "FaultInjectionType", "GenerationEvaluationMetrics",
+    "OptimizationEvaluationMetrics", "RepairEvaluationMetrics",
 ]

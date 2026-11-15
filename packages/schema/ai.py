@@ -304,6 +304,83 @@ class AIOptimizeResponse(ContractModel):
     tool_calls: list[ToolCallRecord] = Field(default_factory=list)
 
 
+FaultInjectionType = Literal[
+    "remove_gate",
+    "replace_gate",
+    "change_parameter",
+    "change_qubit_mapping",
+    "reorder_gates",
+    "remove_measurement",
+]
+
+
+class BenchmarkRecord(ContractModel):
+    circuit_id: str
+    name: str
+    original_circuit: Circuit
+    faulty_circuit: Circuit
+    fault_type: FaultInjectionType
+    error_category: ErrorCategory
+    fault_location: dict[str, Any] = Field(default_factory=dict)
+    expected_behavior: str
+    expected_distribution: dict[str, float] = Field(default_factory=dict)
+    actual_behavior: str
+    corrected_circuit: Circuit
+    split: Literal["development", "held_out"] = "held_out"
+
+
+class BenchmarkDataset(ContractModel):
+    records: list[BenchmarkRecord] = Field(default_factory=list)
+    created_at: str
+    version: str = "1.0.0"
+    summary: dict[str, int] = Field(default_factory=dict)
+
+
+class DiagnosisEvaluationMetrics(ContractModel):
+    total_cases: int
+    classification_accuracy: float
+    localization_accuracy: float
+    precision: float
+    recall: float
+    f1_score: float
+    per_category_metrics: dict[str, dict[str, float]] = Field(default_factory=dict)
+
+
+class RepairEvaluationMetrics(ContractModel):
+    total_cases: int
+    repair_success_rate: float
+    semantic_correctness_rate: float
+    avg_iterations: float
+    invalid_repair_rate: float
+    avg_fidelity: float
+
+
+class GenerationEvaluationMetrics(ContractModel):
+    total_cases: int
+    schema_validation_rate: float
+    execution_success_rate: float
+    equivalence_rate: float
+
+
+class OptimizationEvaluationMetrics(ContractModel):
+    total_cases: int
+    avg_gate_reduction_percent: float
+    avg_depth_reduction_percent: float
+    avg_cnot_reduction_percent: float
+    equivalence_verification_rate: float
+
+
+class BenchmarkEvaluationReport(ContractModel):
+    timestamp: str
+    dataset_split: str
+    diagnosis: DiagnosisEvaluationMetrics
+    repair: RepairEvaluationMetrics
+    generation: GenerationEvaluationMetrics
+    optimization: OptimizationEvaluationMetrics
+    overall_score: float
+
+
+
 
 
 
