@@ -1,8 +1,8 @@
 """AI Copilot contracts for Phase 2: Execution-Grounded AI."""
 
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from .models import Circuit, ContractModel
 
@@ -53,6 +53,36 @@ class CircuitComparison(ContractModel):
     distribution_distance: float | None = None
 
 
+def _normalize_circuit_dict(data: Any) -> Any:
+    if isinstance(data, dict) and "circuit" in data and isinstance(data["circuit"], dict):
+        c = dict(data["circuit"])
+        if "metadata" not in c or c["metadata"] is None:
+            c["metadata"] = {"framework": "qiskit", "task_id": None}
+        if "num_qubits" not in c or c["num_qubits"] is None:
+            c["num_qubits"] = 2
+        if "num_clbits" not in c or c["num_clbits"] is None:
+            c["num_clbits"] = 2
+        if "gates" not in c or c["gates"] is None:
+            c["gates"] = []
+        elif isinstance(c["gates"], list):
+            norm_gates = []
+            for idx, g in enumerate(c["gates"]):
+                if isinstance(g, dict):
+                    g_copy = dict(g)
+                    if "params" not in g_copy or g_copy["params"] is None:
+                        g_copy["params"] = []
+                    if "layer" not in g_copy or g_copy["layer"] is None:
+                        g_copy["layer"] = idx
+                    norm_gates.append(g_copy)
+                else:
+                    norm_gates.append(g)
+            c["gates"] = norm_gates
+        if "measurements" not in c or c["measurements"] is None:
+            c["measurements"] = []
+        data["circuit"] = c
+    return data
+
+
 class AIChatRequest(ContractModel):
     query: str
     circuit: Circuit | None = None
@@ -61,6 +91,12 @@ class AIChatRequest(ContractModel):
     backend: Literal["aer"] = "aer"
     shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
     seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        return _normalize_circuit_dict(data)
+
 
 
 class AIChatResponse(ContractModel):
@@ -75,6 +111,12 @@ class AIAnalyzeRequest(ContractModel):
     source_code: str | None = None
     shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
     seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        return _normalize_circuit_dict(data)
+
 
 
 class AIAnalyzeResponse(ContractModel):
@@ -102,6 +144,12 @@ class AIDiagnoseRequest(ContractModel):
     expected_distribution: dict[str, float] | None = None
     shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
     seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        return _normalize_circuit_dict(data)
+
 
 
 class AIDiagnoseResponse(ContractModel):
@@ -162,6 +210,12 @@ class AIRepairRequest(ContractModel):
     expected_distribution: dict[str, float] | None = None
     error_category: ErrorCategory | None = None
     iteration: Annotated[int, Field(ge=1, le=10, strict=True)] = 1
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        return _normalize_circuit_dict(data)
+
 
 
 class AIRepairResponse(ContractModel):

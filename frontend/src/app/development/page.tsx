@@ -14,7 +14,8 @@ export default function DevelopmentMode() {
     num_qubits: 2,
     num_clbits: 2,
     gates: [],
-    measurements: []
+    measurements: [],
+    metadata: { framework: 'qiskit', task_id: null },
   });
   
   // Undo/Redo state

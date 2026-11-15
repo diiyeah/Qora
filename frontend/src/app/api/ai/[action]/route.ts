@@ -10,6 +10,25 @@ export async function POST(
     const { action } = await params;
     const body = await request.json();
 
+    if (body.circuit && typeof body.circuit === 'object') {
+      if (!body.circuit.metadata) {
+        body.circuit.metadata = { framework: 'qiskit', task_id: null };
+      }
+      if (!Array.isArray(body.circuit.gates)) {
+        body.circuit.gates = [];
+      } else {
+        body.circuit.gates = body.circuit.gates.map((g: any, idx: number) => ({
+          name: g.name,
+          qubits: g.qubits || [],
+          params: g.params || [],
+          layer: g.layer ?? idx,
+        }));
+      }
+      if (!Array.isArray(body.circuit.measurements)) {
+        body.circuit.measurements = [];
+      }
+    }
+
     const backendRes = await fetch(`${BACKEND_URL}/api/ai/${action}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

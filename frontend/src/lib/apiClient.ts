@@ -42,6 +42,22 @@ const apiClient = axios.create({
   },
 });
 
+export const normalizeCircuit = (circuit?: CircuitSchema): CircuitSchema | undefined => {
+  if (!circuit) return undefined;
+  return {
+    num_qubits: circuit.num_qubits || 2,
+    num_clbits: circuit.num_clbits || 2,
+    gates: (circuit.gates || []).map((g, idx) => ({
+      name: g.name,
+      qubits: g.qubits || [],
+      params: g.params || [],
+      layer: g.layer ?? idx,
+    })),
+    measurements: circuit.measurements || [],
+    metadata: circuit.metadata || { framework: 'qiskit', task_id: null },
+  };
+};
+
 export const QuantumAPI = {
   simulate: async (data: SimulateRequest): Promise<SimulateResponse> => {
     const response = await apiClient.post('/simulate', data);
@@ -68,7 +84,7 @@ export const QuantumAPI = {
   },
   
   analyze: async (circuit: CircuitSchema) => {
-    const response = await apiClient.post('/analyze', { circuit });
+    const response = await apiClient.post('/analyze', { circuit: normalizeCircuit(circuit) });
     return response.data;
   },
   
@@ -80,7 +96,7 @@ export const QuantumAPI = {
   aiChat: async (query: string, circuit?: CircuitSchema, expectedBehavior?: string) => {
     const response = await apiClient.post('/ai/chat', {
       query,
-      circuit,
+      circuit: normalizeCircuit(circuit),
       expected_behavior: expectedBehavior,
     });
     return response.data;
@@ -88,7 +104,7 @@ export const QuantumAPI = {
 
   aiDiagnose: async (circuit?: CircuitSchema, sourceCode?: string, expectedBehavior?: string) => {
     const response = await apiClient.post('/ai/diagnose', {
-      circuit,
+      circuit: normalizeCircuit(circuit),
       source_code: sourceCode,
       expected_behavior: expectedBehavior,
     });
@@ -101,7 +117,7 @@ export const QuantumAPI = {
   },
 
   aiAnalyze: async (circuit: CircuitSchema) => {
-    const response = await apiClient.post('/ai/analyze', { circuit });
+    const response = await apiClient.post('/ai/analyze', { circuit: normalizeCircuit(circuit) });
     return response.data;
   },
 
@@ -112,7 +128,7 @@ export const QuantumAPI = {
     iteration: number = 1
   ) => {
     const response = await apiClient.post('/ai/repair', {
-      circuit,
+      circuit: normalizeCircuit(circuit),
       source_code: sourceCode,
       expected_behavior: expectedBehavior,
       iteration,
