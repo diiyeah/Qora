@@ -10,6 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115,<1",
+    "httpx>=0.28,<1",
     "pydantic>=2.10,<3",
     "qiskit>=2.0,<3",
     "qiskit-aer>=0.17,<0.18",
@@ -18,7 +19,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "httpx>=0.28,<1",
     "jsonschema>=4.23,<5",
     "mypy>=1.15,<2",
     "pytest>=8,<10",
