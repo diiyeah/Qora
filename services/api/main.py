@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 
 from packages.schema.api import ErrorInfo, ErrorResponse, SimulationRequest, SimulationResult
+from services.api.ai import ai_router
 from services.api.errors import PlatformError
 from services.api.simulate import simulate_bell
 
@@ -85,4 +86,6 @@ def simulate(request: SimulationRequest) -> SimulationResult:
 
 app.include_router(router, prefix="/v1")
 app.include_router(router, include_in_schema=False)
+app.include_router(ai_router, prefix="/api/ai")
+app.include_router(ai_router, prefix="/v1/ai", include_in_schema=False)
 
