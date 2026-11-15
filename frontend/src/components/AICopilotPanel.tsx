@@ -26,7 +26,7 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
   currentCode,
   onApplyCircuit,
 }) => {
-  const [activeTab, setActiveTab] = useState<'chat' | 'generate' | 'diagnose'>('generate');
+  const [activeTab, setActiveTab] = useState<'generate' | 'chat' | 'diagnose' | 'repair'>('generate');
 
   // Generation state
   const [generatePrompt, setGeneratePrompt] = useState('Create a two-qubit Bell state');
@@ -48,6 +48,13 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
   const [isDiagnosing, setIsDiagnosing] = useState(false);
   const [diagnosisResult, setDiagnosisResult] = useState<any | null>(null);
   const [diagError, setDiagError] = useState<string | null>(null);
+
+  // Repair state
+  const [isRepairing, setIsRepairing] = useState(false);
+  const [repairProposal, setRepairProposal] = useState<any | null>(null);
+  const [repairIteration, setRepairIteration] = useState(1);
+  const [repairError, setRepairError] = useState<string | null>(null);
+  const [repairBanner, setRepairBanner] = useState<string | null>(null);
 
   const handleGenerate = async (promptToUse?: string) => {
     const prompt = promptToUse || generatePrompt;
@@ -106,10 +113,36 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
     }
   };
 
+  const handleProposeRepair = async (iterationNum: number = 1) => {
+    setIsRepairing(true);
+    setRepairError(null);
+    setRepairBanner(null);
+    try {
+      const res = await QuantumAPI.aiRepair(currentCircuit, currentCode, undefined, iterationNum);
+      setRepairProposal(res.proposal);
+      setRepairIteration(res.iteration);
+    } catch (err: any) {
+      setRepairError(err.message || 'Repair proposal generation failed.');
+    } finally {
+      setIsRepairing(false);
+    }
+  };
+
+  const handleApplyRepair = () => {
+    if (!repairProposal?.repaired_circuit) return;
+    onApplyCircuit(repairProposal.repaired_circuit);
+    setRepairBanner('✓ Repaired circuit applied to workspace successfully!');
+  };
+
+  const handleRejectRepair = () => {
+    setRepairProposal(null);
+    setRepairBanner('Repair proposal rejected.');
+  };
+
   return (
     <div className="flex flex-col h-full bg-panels text-textMain">
       {/* Sub-tab Navigation */}
-      <div className="flex border-b border-borders text-xs font-medium">
+      <div className="flex border-b border-borders text-[11px] font-medium">
         <button
           onClick={() => setActiveTab('generate')}
           className={`flex-1 py-2 text-center transition-colors ${
@@ -118,7 +151,7 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
               : 'text-muted hover:text-textMain'
           }`}
         >
-          ⚡ NL Generator
+          ⚡ Generator
         </button>
         <button
           onClick={() => setActiveTab('chat')}
@@ -128,7 +161,7 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
               : 'text-muted hover:text-textMain'
           }`}
         >
-          💬 Copilot Chat
+          💬 Chat
         </button>
         <button
           onClick={() => setActiveTab('diagnose')}
@@ -139,6 +172,21 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
           }`}
         >
           🔍 Diagnosis
+        </button>
+        <button
+          onClick={() => {
+            setActiveTab('repair');
+            if (!repairProposal && !isRepairing) {
+              handleProposeRepair(1);
+            }
+          }}
+          className={`flex-1 py-2 text-center transition-colors ${
+            activeTab === 'repair'
+              ? 'border-b-2 border-primary text-primary font-bold bg-background/40'
+              : 'text-muted hover:text-textMain'
+          }`}
+        >
+          🔧 Repair
         </button>
       </div>
 
@@ -384,6 +432,138 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
                     <span>{diagnosisResult.suggested_fix}</span>
                   </div>
                 )}
+
+                <button
+                  onClick={() => {
+                    setActiveTab('repair');
+                    handleProposeRepair(1);
+                  }}
+                  className="w-full mt-2 py-1.5 bg-primary text-white text-xs font-semibold rounded hover:bg-primary/90 transition-colors"
+                >
+                  ⚡ Propose Repair & Preview Diff →
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 4: REPAIR PROPOSAL & PREVIEW UI (Milestone 4) */}
+        {activeTab === 'repair' && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-textMain">Repair Proposal & Diff</span>
+              <span className="text-[10px] px-2 py-0.5 bg-background border border-borders rounded text-muted">
+                Iteration {repairIteration} / 3
+              </span>
+            </div>
+
+            <button
+              onClick={() => handleProposeRepair(repairIteration)}
+              disabled={isRepairing}
+              className="w-full py-2 bg-background border border-borders text-textMain text-xs font-semibold rounded hover:border-primary transition-colors flex items-center justify-center gap-2"
+            >
+              {isRepairing ? (
+                <>
+                  <span className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin"></span>
+                  Synthesizing Repair Proposal...
+                </>
+              ) : (
+                '🔧 Propose Circuit Repair'
+              )}
+            </button>
+
+            {repairBanner && (
+              <div
+                className={`p-2 text-xs rounded border ${
+                  repairBanner.includes('✓')
+                    ? 'bg-success/10 border-success/30 text-success'
+                    : 'bg-warning/10 border-warning/30 text-warning'
+                }`}
+              >
+                {repairBanner}
+              </div>
+            )}
+
+            {repairError && (
+              <div className="p-2 text-xs bg-error/10 border border-error/30 text-error rounded">
+                {repairError}
+              </div>
+            )}
+
+            {repairProposal && (
+              <div className="p-3 bg-background border border-borders rounded space-y-3 text-xs">
+                {/* Defect Category & Confidence */}
+                <div className="flex items-center justify-between">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-error/20 text-error">
+                    Defect: {repairProposal.error_category.replace('_', ' ')}
+                  </span>
+                  <span className="text-[10px] text-muted">
+                    Confidence: {(repairProposal.confidence * 100).toFixed(0)}%
+                  </span>
+                </div>
+
+                <div className="font-semibold text-textMain text-[11px]">
+                  {repairProposal.diagnosis_summary}
+                </div>
+
+                {/* Diff Summary Items */}
+                {repairProposal.diff_summary.length > 0 && (
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted uppercase font-bold block">
+                      Proposed Circuit Changes:
+                    </span>
+                    {repairProposal.diff_summary.map((change: string, idx: number) => (
+                      <div
+                        key={idx}
+                        className="px-2 py-1 bg-panels border-l-2 border-primary text-[10px] font-mono text-textMain rounded"
+                      >
+                        {change}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Code Diff Block */}
+                {repairProposal.code_diff && (
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted uppercase font-bold block">
+                      Code Diff (Before / After):
+                    </span>
+                    <pre className="p-2 bg-panels border border-borders rounded font-mono text-[9px] overflow-x-auto text-textMain whitespace-pre leading-tight">
+                      {repairProposal.code_diff.split('\n').map((line: string, i: number) => {
+                        let color = 'text-textMain';
+                        if (line.startsWith('+') && !line.startsWith('+++')) {
+                          color = 'text-success font-semibold';
+                        } else if (line.startsWith('-') && !line.startsWith('---')) {
+                          color = 'text-error font-semibold';
+                        } else if (line.startsWith('@@')) {
+                          color = 'text-muted';
+                        }
+                        return (
+                          <div key={i} className={color}>
+                            {line}
+                          </div>
+                        );
+                      })}
+                    </pre>
+                  </div>
+                )}
+
+                {/* Apply / Reject Controls */}
+                <div className="flex gap-2 pt-1">
+                  <button
+                    onClick={handleApplyRepair}
+                    className="flex-1 py-1.5 bg-success text-white text-xs font-semibold rounded hover:bg-success/90 transition-colors"
+                  >
+                    ✓ Apply Repair
+                  </button>
+                  <button
+                    onClick={handleRejectRepair}
+                    className="flex-1 py-1.5 bg-error/10 border border-error/30 text-error text-xs font-semibold rounded hover:bg-error/20 transition-colors"
+                  >
+                    ✕ Reject
+                  </button>
+                </div>
               </div>
             )}
           </div>

@@ -11,11 +11,15 @@ from .ai import (
     AIDiagnoseResponse,
     AIGenerateRequest,
     AIGenerateResponse,
+    AIRepairRequest,
+    AIRepairResponse,
     CircuitAnalysis,
     CircuitComparison,
     ErrorCategory,
     ErrorDiagnosis,
     ExecutionEvidence,
+    RepairAction,
+    RepairProposal,
     ToolCallRecord,
 )
 
@@ -24,6 +28,7 @@ __all__ = [
     "ErrorResponse", "SimulationRequest", "SimulationResult",
     "AIChatRequest", "AIChatResponse", "AIAnalyzeRequest", "AIAnalyzeResponse",
     "AIDiagnoseRequest", "AIDiagnoseResponse", "AIGenerateRequest", "AIGenerateResponse",
+    "AIRepairRequest", "AIRepairResponse", "RepairAction", "RepairProposal",
     "ErrorDiagnosis", "CircuitAnalysis", "CircuitComparison", "ErrorCategory",
     "ExecutionEvidence", "ToolCallRecord",
 ]

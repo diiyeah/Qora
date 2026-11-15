@@ -104,4 +104,19 @@ export const QuantumAPI = {
     const response = await apiClient.post('/ai/analyze', { circuit });
     return response.data;
   },
+
+  aiRepair: async (
+    circuit: CircuitSchema,
+    sourceCode?: string,
+    expectedBehavior?: string,
+    iteration: number = 1
+  ) => {
+    const response = await apiClient.post('/ai/repair', {
+      circuit,
+      source_code: sourceCode,
+      expected_behavior: expectedBehavior,
+      iteration,
+    });
+    return response.data;
+  },
 };

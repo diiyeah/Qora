@@ -11,6 +11,8 @@ from packages.schema.ai import (
     AIDiagnoseResponse,
     AIGenerateRequest,
     AIGenerateResponse,
+    AIRepairRequest,
+    AIRepairResponse,
     CircuitAnalysis,
     ErrorDiagnosis,
     ExecutionEvidence,
@@ -20,6 +22,7 @@ from packages.schema.models import Circuit
 from services.api.ai.context_builder import CircuitContext, CircuitContextBuilder
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
 from services.api.ai.generator import NaturalLanguageCircuitGenerator
+from services.api.ai.repair_engine import QuantumCircuitRepairEngine
 from services.api.ai.llm_client import LLMProvider, get_llm_provider
 from services.api.tools.circuit_ops import (
     analyze_circuit,
@@ -180,5 +183,32 @@ class AIOrchestrator:
             shots=request.shots,
             seed=request.seed,
         )
+
+    def repair(self, request: AIRepairRequest) -> AIRepairResponse:
+        """Generate structured repair proposal and code diff for faulty quantum circuit."""
+        proposal = QuantumCircuitRepairEngine.propose_repair(
+            circuit=request.circuit,
+            source_code=request.source_code,
+            expected_behavior=request.expected_behavior,
+            expected_distribution=request.expected_distribution,
+            iteration=request.iteration,
+        )
+
+        return AIRepairResponse(
+            proposal=proposal,
+            iteration=request.iteration,
+            tool_calls=[
+                ToolCallRecord(
+                    tool="repair_circuit",
+                    args={
+                        "error_category": proposal.error_category,
+                        "actions_count": len(proposal.actions),
+                        "iteration": request.iteration,
+                    },
+                    result={"status": "proposal_generated", "confidence": proposal.confidence},
+                )
+            ],
+        )
+
 
 

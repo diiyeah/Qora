@@ -8,6 +8,7 @@ from packages.schema.ai import (
     AIChatResponse,
     AIDiagnoseResponse,
     AIGenerateResponse,
+    AIRepairResponse,
 )
 from services.api.main import app
 
@@ -128,5 +129,39 @@ def test_ai_generate_endpoint(prefix: str) -> None:
     assert data.validation_passed is True
     assert "00" in data.distribution
     assert "11" in data.distribution
+
+
+@pytest.mark.parametrize("prefix", ["/api/ai", "/v1/ai"])
+def test_ai_repair_endpoint(prefix: str) -> None:
+    faulty_payload = {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+            {"name": "cx", "qubits": [0, 1], "params": [], "layer": 0},
+            {"name": "h", "qubits": [0], "params": [], "layer": 1},
+        ],
+        "measurements": [
+            {"qubit": 0, "clbit": 0},
+            {"qubit": 1, "clbit": 1},
+        ],
+        "metadata": {"framework": "qiskit"},
+    }
+    with TestClient(app) as client:
+        resp = client.post(
+            f"{prefix}/repair",
+            json={
+                "circuit": faulty_payload,
+                "expected_behavior": "Two-qubit Bell state",
+                "iteration": 1,
+            },
+        )
+    assert resp.status_code == 200
+    data = AIRepairResponse.model_validate(resp.json())
+    assert data.proposal.error_category == "gate_ordering"
+    assert len(data.proposal.actions) > 0
+    assert data.proposal.repaired_circuit.gates[0].name == "h"
+    assert data.proposal.repaired_circuit.gates[1].name == "cx"
+    assert data.proposal.code_diff
+
 
 

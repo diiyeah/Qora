@@ -125,3 +125,49 @@ class AIGenerateResponse(ContractModel):
     tool_calls: list[ToolCallRecord] = Field(default_factory=list)
 
 
+RepairActionType = Literal[
+    "replace_gate",
+    "insert_gate",
+    "delete_gate",
+    "swap_qubits",
+    "modify_parameter",
+    "add_measurement",
+    "fix_clbit",
+]
+
+
+class RepairAction(ContractModel):
+    action_type: RepairActionType
+    gate_index: int | None = None
+    original: dict[str, object] | None = None
+    replacement: dict[str, object] | None = None
+    explanation: str
+
+
+class RepairProposal(ContractModel):
+    original_circuit: Circuit
+    repaired_circuit: Circuit
+    error_category: ErrorCategory
+    diagnosis_summary: str
+    actions: list[RepairAction] = Field(default_factory=list)
+    diff_summary: list[str] = Field(default_factory=list)
+    code_diff: str = ""
+    confidence: Annotated[float, Field(ge=0.0, le=1.0)] = 0.95
+
+
+class AIRepairRequest(ContractModel):
+    circuit: Circuit
+    source_code: str | None = None
+    expected_behavior: str | None = None
+    expected_distribution: dict[str, float] | None = None
+    error_category: ErrorCategory | None = None
+    iteration: Annotated[int, Field(ge=1, le=10, strict=True)] = 1
+
+
+class AIRepairResponse(ContractModel):
+    proposal: RepairProposal
+    iteration: int = 1
+    tool_calls: list[ToolCallRecord] = Field(default_factory=list)
+
+
+

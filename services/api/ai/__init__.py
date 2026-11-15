@@ -3,6 +3,7 @@
 from .context_builder import CircuitContext, CircuitContextBuilder
 from .diagnostics import QuantumDiagnosticsEngine
 from .generator import NaturalLanguageCircuitGenerator
+from .repair_engine import QuantumCircuitRepairEngine
 from .llm_client import LLMProvider, MockLLMProvider, get_llm_provider
 from .orchestrator import AIOrchestrator
 from .routes import router as ai_router
@@ -12,6 +13,7 @@ __all__ = [
     "CircuitContextBuilder",
     "QuantumDiagnosticsEngine",
     "NaturalLanguageCircuitGenerator",
+    "QuantumCircuitRepairEngine",
     "LLMProvider",
     "MockLLMProvider",
     "get_llm_provider",

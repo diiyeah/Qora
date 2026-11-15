@@ -6,6 +6,7 @@ from typing import Any
 
 from packages.schema.models import Circuit
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
+from services.api.ai.repair_engine import QuantumCircuitRepairEngine
 from services.api.errors import PlatformError
 from services.api.tools.circuit_ops import (
     analyze_circuit,
@@ -177,6 +178,23 @@ class ToolRegistry:
                     "shots": {"type": "integer", "default": 1024},
                     "seed": {"type": "integer", "nullable": True},
                 },
+            },
+        )
+
+        self.register(
+            name="repair_circuit",
+            description="Propose structured repairs, gate replacements, and code diffs for faulty circuits.",
+            handler=QuantumCircuitRepairEngine.propose_repair,
+            parameters={
+                "type": "object",
+                "properties": {
+                    "circuit": {"type": "object", "description": "Canonical QORA circuit"},
+                    "source_code": {"type": "string", "nullable": True},
+                    "expected_behavior": {"type": "string", "nullable": True},
+                    "expected_distribution": {"type": "object", "nullable": True},
+                    "iteration": {"type": "integer", "default": 1},
+                },
+                "required": ["circuit"],
             },
         )
 
