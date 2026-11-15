@@ -13,3 +13,6 @@ dist/
 .env.*
 !.env.example
 
+frontend/node_modules/
+frontend/.next/
+pytest-cache-files-*/
