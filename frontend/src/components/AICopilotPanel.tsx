@@ -26,7 +26,7 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
   currentCode,
   onApplyCircuit,
 }) => {
-  const [activeTab, setActiveTab] = useState<'generate' | 'chat' | 'diagnose' | 'repair'>('generate');
+  const [activeTab, setActiveTab] = useState<'generate' | 'chat' | 'diagnose' | 'repair' | 'optimize'>('generate');
 
   // Generation state
   const [generatePrompt, setGeneratePrompt] = useState('Create a two-qubit Bell state');
@@ -55,6 +55,44 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
   const [repairIteration, setRepairIteration] = useState(1);
   const [repairError, setRepairError] = useState<string | null>(null);
   const [repairBanner, setRepairBanner] = useState<string | null>(null);
+
+  // Optimization state
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [optLevel, setOptLevel] = useState<number>(2);
+  const [optimizationResult, setOptimizationResult] = useState<any | null>(null);
+  const [optError, setOptError] = useState<string | null>(null);
+  const [optBanner, setOptBanner] = useState<string | null>(null);
+
+  const handleOptimize = async (level: number = optLevel) => {
+    setIsOptimizing(true);
+    setOptError(null);
+    setOptBanner(null);
+    try {
+      const res = await QuantumAPI.aiOptimize(currentCircuit, level);
+      setOptimizationResult(res);
+      if (res.transformations && res.transformations.length > 0) {
+        setOptBanner(`Optimization found ${res.transformations.length} simplification opportunity(ies).`);
+      } else {
+        setOptBanner('Circuit is already in optimal canonical form.');
+      }
+    } catch (err: any) {
+      setOptError(err.message || 'Circuit optimization failed.');
+    } finally {
+      setIsOptimizing(false);
+    }
+  };
+
+  const handleApplyOptimization = () => {
+    if (optimizationResult?.optimized_circuit) {
+      onApplyCircuit(optimizationResult.optimized_circuit);
+      setOptBanner('Optimized circuit applied to workspace!');
+    }
+  };
+
+  const handleRejectOptimization = () => {
+    setOptimizationResult(null);
+    setOptBanner('Optimization rejected. Kept original circuit.');
+  };
 
   const handleGenerate = async (promptToUse?: string) => {
     const prompt = promptToUse || generatePrompt;
@@ -187,6 +225,21 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
           }`}
         >
           🔧 Repair
+        </button>
+        <button
+          onClick={() => {
+            setActiveTab('optimize');
+            if (!optimizationResult && !isOptimizing) {
+              handleOptimize();
+            }
+          }}
+          className={`flex-1 py-2 text-center transition-colors ${
+            activeTab === 'optimize'
+              ? 'border-b-2 border-primary text-primary font-bold bg-background/40'
+              : 'text-muted hover:text-textMain'
+          }`}
+        >
+          🚀 Optimize
         </button>
       </div>
 
@@ -559,6 +612,158 @@ export const AICopilotPanel: React.FC<AICopilotPanelProps> = ({
                   </button>
                   <button
                     onClick={handleRejectRepair}
+                    className="flex-1 py-1.5 bg-error/10 border border-error/30 text-error text-xs font-semibold rounded hover:bg-error/20 transition-colors"
+                  >
+                    ✕ Reject
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 5: OPTIMIZER */}
+        {activeTab === 'optimize' && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="text-xs font-bold text-textMain">AI Circuit Optimizer</h4>
+                <p className="text-[10px] text-muted">
+                  Algebraic cancellation, rotation merging & formal equivalence verification.
+                </p>
+              </div>
+              <div className="flex items-center gap-1 text-[10px]">
+                <span className="text-muted">Level:</span>
+                {[1, 2, 3].map((lvl) => (
+                  <button
+                    key={lvl}
+                    onClick={() => {
+                      setOptLevel(lvl);
+                      handleOptimize(lvl);
+                    }}
+                    className={`px-1.5 py-0.5 rounded border ${
+                      optLevel === lvl
+                        ? 'bg-primary text-white border-primary font-bold'
+                        : 'bg-background border-borders text-muted hover:text-textMain'
+                    }`}
+                  >
+                    L{lvl}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleOptimize(optLevel)}
+              disabled={isOptimizing}
+              className="w-full py-2 bg-primary text-white text-xs font-semibold rounded hover:bg-primary/90 disabled:opacity-50 transition-colors"
+            >
+              {isOptimizing ? 'Analyzing & Optimizing...' : '🚀 Run Circuit Optimization'}
+            </button>
+
+            {optBanner && (
+              <div className="p-2 text-[11px] rounded bg-primary/10 border border-primary/30 text-primary">
+                {optBanner}
+              </div>
+            )}
+
+            {optError && (
+              <div className="p-2 text-[11px] rounded bg-error/10 border border-error/30 text-error">
+                {optError}
+              </div>
+            )}
+
+            {optimizationResult && (
+              <div className="space-y-3 p-3 bg-background border border-borders rounded-md">
+                {/* Equivalence Badge */}
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium text-muted">Formal Verification:</span>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      optimizationResult.equivalent
+                        ? 'bg-success/20 text-success border border-success/40'
+                        : 'bg-error/20 text-error border border-error/40'
+                    }`}
+                  >
+                    {optimizationResult.equivalent
+                      ? `✓ Equivalent (Fidelity: ${((optimizationResult.fidelity ?? 1) * 100).toFixed(1)}%)`
+                      : '✕ Equivalence Failed'}
+                  </span>
+                </div>
+
+                {/* Metrics Comparison Grid */}
+                {optimizationResult.metrics && (
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="p-2 bg-panels border border-borders rounded">
+                      <div className="text-[10px] text-muted">Gates</div>
+                      <div className="text-xs font-bold text-textMain mt-0.5">
+                        {optimizationResult.metrics.original_gate_count} → {optimizationResult.metrics.optimized_gate_count}
+                      </div>
+                      <div className="text-[9px] text-success font-semibold mt-0.5">
+                        -{optimizationResult.metrics.gate_reduction_percent}%
+                      </div>
+                    </div>
+                    <div className="p-2 bg-panels border border-borders rounded">
+                      <div className="text-[10px] text-muted">Depth</div>
+                      <div className="text-xs font-bold text-textMain mt-0.5">
+                        {optimizationResult.metrics.original_depth} → {optimizationResult.metrics.optimized_depth}
+                      </div>
+                      <div className="text-[9px] text-success font-semibold mt-0.5">
+                        -{optimizationResult.metrics.depth_reduction_percent}%
+                      </div>
+                    </div>
+                    <div className="p-2 bg-panels border border-borders rounded">
+                      <div className="text-[10px] text-muted">CNOTs</div>
+                      <div className="text-xs font-bold text-textMain mt-0.5">
+                        {optimizationResult.metrics.original_cnot_count} → {optimizationResult.metrics.optimized_cnot_count}
+                      </div>
+                      <div className="text-[9px] text-success font-semibold mt-0.5">
+                        -{optimizationResult.metrics.cnot_reduction_percent}%
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Transformations Applied */}
+                {optimizationResult.transformations && optimizationResult.transformations.length > 0 && (
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted uppercase font-bold block">
+                      Applied Transformations ({optimizationResult.transformations.length}):
+                    </span>
+                    <div className="space-y-1 max-h-32 overflow-y-auto">
+                      {optimizationResult.transformations.map((t: any, idx: number) => (
+                        <div
+                          key={idx}
+                          className="p-1.5 bg-panels border border-borders rounded text-[10px] flex items-center justify-between"
+                        >
+                          <span className="text-textMain">{t.description}</span>
+                          <span className="px-1 py-0.5 rounded bg-primary/20 text-primary font-mono text-[9px]">
+                            {t.type}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Explanation */}
+                {optimizationResult.explanation && (
+                  <div className="p-2 bg-panels border border-borders rounded text-[10px] text-textMain whitespace-pre-line leading-relaxed">
+                    {optimizationResult.explanation}
+                  </div>
+                )}
+
+                {/* Apply / Reject Controls */}
+                <div className="flex gap-2 pt-1">
+                  <button
+                    onClick={handleApplyOptimization}
+                    disabled={!optimizationResult.equivalent}
+                    className="flex-1 py-1.5 bg-success text-white text-xs font-semibold rounded hover:bg-success/90 disabled:opacity-40 transition-colors"
+                  >
+                    ✓ Apply Optimized Circuit
+                  </button>
+                  <button
+                    onClick={handleRejectOptimization}
                     className="flex-1 py-1.5 bg-error/10 border border-error/30 text-error text-xs font-semibold rounded hover:bg-error/20 transition-colors"
                   >
                     ✕ Reject

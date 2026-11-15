@@ -164,4 +164,37 @@ def test_ai_repair_endpoint(prefix: str) -> None:
     assert data.proposal.code_diff
 
 
+@pytest.mark.parametrize("prefix", ["/api/ai", "/v1/ai"])
+def test_ai_optimize_endpoint(prefix: str) -> None:
+    redundant_payload = {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "gates": [
+            {"name": "h", "qubits": [0], "params": [], "layer": 0},
+            {"name": "h", "qubits": [0], "params": [], "layer": 1},
+            {"name": "x", "qubits": [1], "params": [], "layer": 2},
+        ],
+        "measurements": [
+            {"qubit": 0, "clbit": 0},
+            {"qubit": 1, "clbit": 1},
+        ],
+        "metadata": {"framework": "qiskit"},
+    }
+    with TestClient(app) as client:
+        resp = client.post(
+            f"{prefix}/optimize",
+            json={
+                "circuit": redundant_payload,
+                "level": 2,
+            },
+        )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["equivalent"] is True
+    assert data["metrics"]["original_gate_count"] == 3
+    assert data["metrics"]["optimized_gate_count"] == 1
+    assert data["optimized_circuit"]["gates"][0]["name"] == "x"
+
+
+
 

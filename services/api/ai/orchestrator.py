@@ -11,6 +11,8 @@ from packages.schema.ai import (
     AIDiagnoseResponse,
     AIGenerateRequest,
     AIGenerateResponse,
+    AIOptimizeRequest,
+    AIOptimizeResponse,
     AIRepairRequest,
     AIRepairResponse,
     CircuitAnalysis,
@@ -24,6 +26,7 @@ from packages.schema.models import Circuit
 from services.api.ai.context_builder import CircuitContext, CircuitContextBuilder
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
 from services.api.ai.generator import NaturalLanguageCircuitGenerator
+from services.api.ai.optimizer import CircuitOptimizerEngine
 from services.api.ai.repair_engine import QuantumCircuitRepairEngine
 from services.api.ai.verification import CircuitVerificationEngine
 from services.api.ai.llm_client import LLMProvider, get_llm_provider
@@ -231,6 +234,27 @@ class AIOrchestrator:
             )
         ]
         return res
+
+    def optimize(self, request: AIOptimizeRequest) -> AIOptimizeResponse:
+        """Optimize quantum circuit via gate cancellation, rotation merging, and formal equivalence check."""
+        resp = CircuitOptimizerEngine.optimize(
+            circuit=request.circuit,
+            level=request.level,
+            shots=request.shots,
+            seed=request.seed,
+        )
+        resp.tool_calls = [
+            ToolCallRecord(
+                tool="optimize_circuit",
+                args={"level": request.level, "shots": request.shots},
+                result={
+                    "gate_reduction_percent": resp.metrics.gate_reduction_percent,
+                    "depth_reduction_percent": resp.metrics.depth_reduction_percent,
+                    "equivalent": resp.equivalent,
+                },
+            )
+        ]
+        return resp
 
 
 

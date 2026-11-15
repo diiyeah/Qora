@@ -6,6 +6,7 @@ from typing import Any
 
 from packages.schema.models import Circuit
 from services.api.ai.diagnostics import QuantumDiagnosticsEngine
+from services.api.ai.optimizer import CircuitOptimizerEngine
 from services.api.ai.repair_engine import QuantumCircuitRepairEngine
 from services.api.ai.verification import CircuitVerificationEngine
 from services.api.errors import PlatformError
@@ -201,9 +202,18 @@ class ToolRegistry:
 
         self.register(
             name="optimize_circuit",
-            description="Optimize circuit to reduce depth, gate count, or CNOTs (reserved for M6).",
-            handler=lambda circuit, **kwargs: {"status": "optimize_circuit ready for M6 integration"},
-            parameters=circuit_param_schema,
+            description="Optimize quantum circuit to reduce depth, gate count, or CNOTs while preserving equivalence.",
+            handler=CircuitOptimizerEngine.optimize,
+            parameters={
+                "type": "object",
+                "properties": {
+                    "circuit": {"type": "object", "description": "Canonical QORA circuit to optimize"},
+                    "level": {"type": "integer", "default": 2},
+                    "shots": {"type": "integer", "default": 1024},
+                    "seed": {"type": "integer", "nullable": True},
+                },
+                "required": ["circuit"],
+            },
         )
 
         self.register(

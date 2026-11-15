@@ -11,6 +11,8 @@ from packages.schema.ai import (
     AIDiagnoseResponse,
     AIGenerateRequest,
     AIGenerateResponse,
+    AIOptimizeRequest,
+    AIOptimizeResponse,
     AIRepairRequest,
     AIRepairResponse,
 )
@@ -57,6 +59,12 @@ def ai_generate(request: AIGenerateRequest) -> AIGenerateResponse:
 def ai_repair(request: AIRepairRequest) -> AIRepairResponse:
     """Propose structured repairs, gate replacements, and code diffs for faulty circuits."""
     return _orchestrator.repair(request)
+
+
+@router.post("/optimize", response_model=AIOptimizeResponse)
+def ai_optimize(request: AIOptimizeRequest) -> AIOptimizeResponse:
+    """Optimize quantum circuit via gate cancellation, rotation combining, and equivalence verification."""
+    return _orchestrator.optimize(request)
 
 
 

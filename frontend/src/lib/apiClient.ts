@@ -135,4 +135,25 @@ export const QuantumAPI = {
     });
     return response.data;
   },
+
+  aiOptimize: async (circuit: CircuitSchema, level: number = 2) => {
+    const response = await apiClient.post('/ai/optimize', {
+      circuit: normalizeCircuit(circuit),
+      level,
+    });
+    return response.data;
+  },
+
+  verifyCircuit: async (
+    circuit: CircuitSchema,
+    referenceCircuit?: CircuitSchema,
+    expectedBehavior?: string
+  ) => {
+    const response = await apiClient.post('/circuits/verify', {
+      circuit: normalizeCircuit(circuit),
+      reference_circuit: normalizeCircuit(referenceCircuit),
+      expected_behavior: expectedBehavior,
+    });
+    return response.data;
+  },
 };

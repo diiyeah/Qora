@@ -256,5 +256,54 @@ class CircuitVerificationResponse(ContractModel):
     tool_calls: list[ToolCallRecord] = Field(default_factory=list)
 
 
+class OptimizationMetrics(ContractModel):
+    original_gate_count: int
+    optimized_gate_count: int
+    gate_reduction_percent: float
+    original_depth: int
+    optimized_depth: int
+    depth_reduction_percent: float
+    original_cnot_count: int
+    optimized_cnot_count: int
+    cnot_reduction_percent: float
+
+
+class OptimizationTransformation(ContractModel):
+    type: Literal[
+        "cancel_self_inverse",
+        "combine_rotations",
+        "remove_identity",
+        "cnot_cancellation",
+        "transpiler_simplification",
+    ]
+    description: str
+    target_qubits: list[int] = Field(default_factory=list)
+    gates_removed: int = 0
+
+
+class AIOptimizeRequest(ContractModel):
+    circuit: Circuit
+    level: Annotated[int, Field(ge=1, le=3, strict=True)] = 2
+    shots: Annotated[int, Field(ge=1, le=100_000, strict=True)] = 1024
+    seed: Annotated[int, Field(ge=0, le=2**32 - 1, strict=True)] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_circuit(cls, data: Any) -> Any:
+        return _normalize_circuit_dict(data)
+
+
+class AIOptimizeResponse(ContractModel):
+    original_circuit: Circuit
+    optimized_circuit: Circuit
+    metrics: OptimizationMetrics
+    transformations: list[OptimizationTransformation] = Field(default_factory=list)
+    equivalent: bool = True
+    fidelity: float | None = 1.0
+    explanation: str
+    tool_calls: list[ToolCallRecord] = Field(default_factory=list)
+
+
+
 
 
